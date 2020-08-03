@@ -3,40 +3,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClassicUI  extends JFrame{
+public class GameLogic {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton button7;
-    private JButton button8;
-    private JButton button9;
     private JButton button4;
     private JButton button5;
     private JButton button6;
-    private JButton startWithDefensiveAIButton;
-    private JRadioButton classicRadioButton;
-    private JRadioButton forestRadioButton;
-    private JRadioButton highContrastRadioButton;
-    private JButton startWithRandomAIButton;
-    private JLabel Theme;
-    private JButton exitButton;
+    private JButton button7;
+    private JButton button8;
+    private JButton button9;
     private JPanel boardpanel;
     private JPanel settingspanel;
     private JPanel mainpanel;
+    private JButton []button = new JButton[]{button1, button2, button3, button4, button5, button6, button7, button8, button9};
     private String startgame = "X";
     String [][]board = new String[3][3];
 
     Font f1  = new Font("Arial", Font.BOLD, 30);
 
-    public ClassicUI(JFrame frame){
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
 
-
+    public GameLogic(JPanel mainpanel, JPanel boardpanel, JButton[] button, JFrame frame){
+        this.mainpanel = mainpanel;
+        this.boardpanel = boardpanel;
+        this.button = button;
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,12 +38,12 @@ public class ClassicUI  extends JFrame{
                 board[0][0] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -69,12 +59,12 @@ public class ClassicUI  extends JFrame{
                 board[0][1] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -90,12 +80,12 @@ public class ClassicUI  extends JFrame{
                 board[0][2] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -111,12 +101,12 @@ public class ClassicUI  extends JFrame{
                 board[1][0] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -132,12 +122,12 @@ public class ClassicUI  extends JFrame{
                 board[1][1] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -153,12 +143,12 @@ public class ClassicUI  extends JFrame{
                 board[1][2] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -174,12 +164,12 @@ public class ClassicUI  extends JFrame{
                 board[2][0] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -195,12 +185,12 @@ public class ClassicUI  extends JFrame{
                 board[2][1] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
@@ -216,58 +206,19 @@ public class ClassicUI  extends JFrame{
                 board[2][2] = c;
                 if (winner_player("X")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"X has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"X has won");
                     unlockBoard();
                 }
                 else if(winner_player("O")){
                     lockBoard();
-                    JOptionPane.showMessageDialog(mainpanel,"O has won");
+                    JOptionPane.showMessageDialog(GameLogic.this.mainpanel,"O has won");
                     unlockBoard();
                 }
             }
         });
-        initComponents();
     }
-    private void initComponents(){
-        this.setTitle("Tic Tac Toe");
-        this.setSize(450,450);
-        this.setResizable(false);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(ClassicUI.EXIT_ON_CLOSE);
-        this.setBounds(300,40,700,600);
-        this.setResizable(false);
-        this.setContentPane(mainpanel);
-    }
-    private void choose_player(){
-        if (startgame.equalsIgnoreCase("X")){
-            startgame = "O";
-        }
-        else {
-            startgame = "X";
-        }
-    }
-    private boolean winner_player( String player){
-        for (int i = 0; i<3 ; i++) {
-            //Row
-            if ((board[i][0] == player) && (board[i][1] == player) && (board[i][2] == player)) {
-                return true;
-            }
-            //Column
-            if ((board[0][i] == player) && (board[1][i] == player) && (board[2][i] == player)) {
-                return true;
-            }
-        }
 
-            //Diagonal left
-            if ((board[0][0]== player) && (board[1][1]== player) && (board[2][2]== player)){
-                return true;
-            }
-            //Diagonal right
-            if ((board[0][2]== player) && (board[2][1]== player) && (board[2][0]== player)){
-                return true;
-            }
-            return false;
-        }
+
     private void lockBoard(){
         for (int i =0; i<9 ;i++){
             boardpanel.getComponent(i).setEnabled(false);
@@ -289,14 +240,38 @@ public class ClassicUI  extends JFrame{
         button9.setText("");
         for ( int i = 0; i<3; i++){
             for (int j = 0; j<3;j++){
-                     board[i][j] = " ";
+                board[i][j] = " ";
             }
         }
     }
+    private void choose_player(){
+        if (startgame.equalsIgnoreCase("X")){
+            startgame = "O";
+        }
+        else {
+            startgame = "X";
+        }
+    }
+    private boolean winner_player( String player){
+        for (int i = 0; i<3 ; i++) {
+            //Row
+            if ((board[i][0] == player) && (board[i][1] == player) && (board[i][2] == player)) {
+                return true;
+            }
+            //Column
+            if ((board[0][i] == player) && (board[1][i] == player) && (board[2][i] == player)) {
+                return true;
+            }
+        }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        new ClassicUI(frame);
-
+        //Diagonal left
+        if ((board[0][0]== player) && (board[1][1]== player) && (board[2][2]== player)){
+            return true;
+        }
+        //Diagonal right
+        if ((board[0][2]== player) && (board[2][1]== player) && (board[2][0]== player)){
+            return true;
+        }
+        return false;
     }
 }
