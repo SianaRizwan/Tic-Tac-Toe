@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HighContrastTheme {
+    private JButton[] button;
     public void getProperty(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button) {
         boardpanel.setBackground(Color.LIGHT_GRAY);
         settingspanel.setBackground(Color.DARK_GRAY);

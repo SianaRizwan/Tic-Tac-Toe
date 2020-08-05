@@ -64,6 +64,7 @@ public class ThemeSettings {
                 highcontrast.getProperty(mainpanel, boardpanel, settingspanel, button);
             }
         });
+//
 
 
 

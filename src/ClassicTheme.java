@@ -9,6 +9,7 @@ public class ClassicTheme {
     public void getProperty(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button) {
         boardpanel.setBackground(Color.BLACK);
         settingspanel.setBackground(Color.WHITE);
+        mainpanel.setBackground(Color.WHITE);
         for (int i = 0; i < 9; i++) {
             button[i].setBackground(Color.white);
             button[i].setForeground(Color.BLACK);

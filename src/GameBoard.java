@@ -56,9 +56,16 @@ public class GameBoard extends JFrame{
 
 
     public static void main(String[] args) {
+
         JFrame frame = new JFrame();
+
         new GameBoard(frame);
 
 
+
     }
+
+
+
+
 }

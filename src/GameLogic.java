@@ -15,6 +15,11 @@ public class GameLogic {
     private JButton btn_middleCenter;
     private JButton btn_middleRight;
 
+//    END GAME TEXTS
+    private String xWon = "Player Won!";
+    private String yWon = "Computer Won!";
+    private String tie = "It's a TIE!";
+
     //  Varibles
     int freeSpots = 9;
     private String startgame = "X";
@@ -39,7 +44,16 @@ public class GameLogic {
     Player player;
     Computer computer;
 
+    int testCounter = 0;
+
     static int currentState[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+
+    private JPanel restartMainPanel;
+    private JPanel restartBoardPanel;
+    private JButton[] restartButton;
+    private JFrame restartFrame;
+
+
 
     public GameLogic() {
 
@@ -49,6 +63,14 @@ public class GameLogic {
         this.mainpanel = mainpanel;
         this.boardpanel = boardpanel;
         this.button = button;
+
+
+        restartMainPanel = mainpanel;
+        restartBoardPanel = boardpanel;
+        restartButton = button;
+        restartFrame = frame;
+
+
         welcomeMessage();
         initboard();
         initButton(this.button, true, f1, startgame);
@@ -58,11 +80,26 @@ public class GameLogic {
 
     }
 
+    private void restartGame() {
+        //        System.exit(0);
+        JFrame frame = new JFrame();
+        new GameBoard(frame);
+        freeSpots = 9;
+        initboard();
+        initButton(this.button, true, f1, startgame);
+        for (int i = 0; i < currentState.length; i++) {
+            currentState[i] = -1;
+        }
+        player = new Player(this.button, board);
+        computer = new Computer(this.button, board);
+
+    }
+
     private void initboard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = "";
-                for (int k =0; k<9 ;k++){
+                for (int k = 0; k < 9; k++) {
                     boardpanel.getComponent(k).setEnabled(true);
                     button[k].setText("");
                 }
@@ -94,15 +131,21 @@ public class GameLogic {
     private class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!winner_player(computerMarkObj)) {
+            if (!winner_player(computerMarkObj) && (turn % 2 == 0) && (freeSpots % 2 != 0)) {
                 player.currentButton(e);
                 freeSpots--;
+                turn++;
+                testCounter++;
+                //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
                 checkGameWinner();
             }
 
-            if (!winner_player(playerMarkObj)) {
+            if (!winner_player(playerMarkObj) && (turn % 2 != 0) && (freeSpots % 2 == 0)) {
                 computer.currentButton(e);
                 freeSpots--;
+                turn++;
+                testCounter++;
+                //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
                 checkGameWinner();
             }
 
@@ -119,17 +162,19 @@ public class GameLogic {
 
             if (winner_player(playerMarkObj)) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, "X Won!");
-                initboard(); //Refresh Board
-
+                JOptionPane.showMessageDialog(null, xWon);
+//                initboard(); //Refresh Board
+                restartGame();
             } else if (winner_player(computerMarkObj)) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, "O Won!");
-                initboard(); //Refresh Board
+                JOptionPane.showMessageDialog(null, yWon);
+//                initboard(); //Refresh Board
+                restartGame();
             } else if (freeSpots == 0) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, "It's a tie!");
-                initboard(); //Refresh Board
+                JOptionPane.showMessageDialog(null, tie);
+//                initboard(); //Refresh Board
+                restartGame();
             }
         }
 
