@@ -27,6 +27,8 @@ public class GameLogic {
     String computerMark = "O";
     String computerMarkObj = new String(computerMark);
 
+    int turn = 0;
+
     //  UI
     private JPanel boardpanel;
     private JPanel mainpanel;
@@ -51,7 +53,7 @@ public class GameLogic {
         initboard();
         initButton(this.button, true, f1, startgame);
 
-        player = new Player(this.button,board);
+        player = new Player(this.button, board);
         computer = new Computer(this.button, board);
 
     }
@@ -60,18 +62,21 @@ public class GameLogic {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = "";
+                for (int k =0; k<9 ;k++){
+                    boardpanel.getComponent(k).setEnabled(true);
+                    button[k].setText("");
+                }
             }
         }
     }
 
-    public void welcomeMessage()
-    {
+    public void welcomeMessage() {
         System.out.println(
                 " ___   _   __   _   _   __  __ ___    _____  _  ___   _____  __   ___   _____  __   ____ \n" +
-                "/  _) ( ) (  ) ( \\ ( ) (  )/_//  _)  (_   _)( )(  _) (_   _)(  ) (  _) (_   _)(  ) (  __)\n" +
-                "\\_\"-. | | /o \\ | \\\\| | /o \\   \\_\"-.    | |  | || |     | |  /o \\ | |     | |  /  \\ | |_  \n" +
-                " __) )( )( __ )( )\\\\ )( __ )   __) )   ( )  ( )( )_    ( ) ( __ )( )_    ( ) ( O  )(  _) \n" +
-                "/___/ /_\\/_\\/_\\/_\\ \\_\\/_\\/_\\  /___/    /_\\  /_\\/___\\   /_\\ /_\\/_\\/___\\   /_\\  \\__/ /____\\");
+                        "/  _) ( ) (  ) ( \\ ( ) (  )/_//  _)  (_   _)( )(  _) (_   _)(  ) (  _) (_   _)(  ) (  __)\n" +
+                        "\\_\"-. | | /o \\ | \\\\| | /o \\   \\_\"-.    | |  | || |     | |  /o \\ | |     | |  /  \\ | |_  \n" +
+                        " __) )( )( __ )( )\\\\ )( __ )   __) )   ( )  ( )( )_    ( ) ( __ )( )_    ( ) ( O  )(  _) \n" +
+                        "/___/ /_\\/_\\/_\\/_\\ \\_\\/_\\/_\\  /___/    /_\\  /_\\/___\\   /_\\ /_\\/_\\/___\\   /_\\  \\__/ /____\\");
     }
 
 
@@ -105,7 +110,6 @@ public class GameLogic {
 
         public void lockboard() {
             for (int i = 0; i < 9; i++) {
-                button[i].setText("");
                 button[i].setEnabled(false);
             }
         }
@@ -114,22 +118,22 @@ public class GameLogic {
         public void checkGameWinner() {
 
             if (winner_player(playerMarkObj)) {
-                JOptionPane.showMessageDialog(null, "X Won!");
                 lockboard();
+                JOptionPane.showMessageDialog(null, "X Won!");
                 initboard(); //Refresh Board
 
             } else if (winner_player(computerMarkObj)) {
-                JOptionPane.showMessageDialog(null, "O Won!");
                 lockboard();
+                JOptionPane.showMessageDialog(null, "O Won!");
                 initboard(); //Refresh Board
             } else if (freeSpots == 0) {
-                JOptionPane.showMessageDialog(null, "It's a tie!");
                 lockboard();
+                JOptionPane.showMessageDialog(null, "It's a tie!");
                 initboard(); //Refresh Board
             }
         }
 
-        //    Game Logi
+        //    Game Logic
         private boolean winner_player(String player) {
             for (int i = 0; i < 3; i++) {
 

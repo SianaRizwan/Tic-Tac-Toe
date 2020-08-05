@@ -26,6 +26,7 @@ public class GameBoard extends JFrame{
     private JPanel settingspanel;
     private JPanel mainpanel;
     GameLogic logic;
+    ThemeSettings theme;
 
 
 
@@ -38,6 +39,7 @@ public class GameBoard extends JFrame{
             }
         });
         logic = new GameLogic(mainpanel,boardpanel,button,frame);
+        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel);
         initComponents();
     }
 
