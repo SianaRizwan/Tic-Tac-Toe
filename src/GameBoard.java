@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,6 +29,8 @@ public class GameBoard extends JFrame{
     GameLogic logic;
     ThemeSettings theme;
 
+    Font f1 = new Font("Arial", Font.BOLD, 30);
+
 
 
     public GameBoard(JFrame frame){
@@ -39,7 +42,7 @@ public class GameBoard extends JFrame{
             }
         });
         logic = new GameLogic(mainpanel,boardpanel,button,frame);
-        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel);
+        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
         initComponents();
     }
 
@@ -52,6 +55,7 @@ public class GameBoard extends JFrame{
         this.setBounds(300,40,700,600);
         this.setResizable(false);
         this.setContentPane(mainpanel);
+        Theme.setFont(f1);
     }
 
 

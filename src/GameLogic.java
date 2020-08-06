@@ -44,7 +44,7 @@ public class GameLogic {
     Player player;
     Computer computer;
 
-    int testCounter = 0;
+    //int testCounter = 0;//Testing
 
     static int currentState[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
@@ -135,7 +135,7 @@ public class GameLogic {
                 player.currentButton(e);
                 freeSpots--;
                 turn++;
-                testCounter++;
+                //testCounter++;
                 //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
                 checkGameWinner();
             }
@@ -144,7 +144,7 @@ public class GameLogic {
                 computer.currentButton(e);
                 freeSpots--;
                 turn++;
-                testCounter++;
+                //testCounter++;
                 //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
                 checkGameWinner();
             }

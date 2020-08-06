@@ -28,7 +28,7 @@ public class Computer implements IButtonListener {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 btnRelation[i][j] = k;
-                System.out.println("Called Board:"+ calledBoard[i][j]);
+                //System.out.println("Called Board:"+ calledBoard[i][j]);
                 k++;
             }
         }
@@ -41,8 +41,8 @@ public class Computer implements IButtonListener {
         //System.out.println("Outside loop - AI I: " + ai_i + " AI J: " + ai_j);
 
         while (true) {
-            loopCounter++;
-            System.out.println("OUTSIDE LOOP COUNTER "+ loopCounter);
+            //loopCounter++;
+            //System.out.println("OUTSIDE LOOP COUNTER "+ loopCounter);
             if(loopCounter == 500)
             {
                 System.out.println("INSIDE IF LOOP CROSSED "+ loopCounter);

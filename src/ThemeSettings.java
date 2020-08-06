@@ -3,20 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ThemeSettings {
-    private JButton upperLeft;
-    private JButton upperMiddle;
-    private JButton upperRight;
-    private JButton lowerLeft;
-    private JButton lowerMiddle;
-    private JButton lowerRight;
-    private JButton middleLeft;
-    private JButton middleCenter;
-    private JButton middleRight;
-    private JButton[] button = new JButton[]{upperLeft, upperMiddle, upperRight, middleLeft, middleCenter, middleRight, lowerLeft, lowerMiddle, lowerRight};
-
+    private JButton[] button;
     private JPanel mainpanel;
     private JPanel boardpanel;
     private JPanel settingspanel;
+    private JLabel Theme;
 
     private JRadioButton rBClassic;
     private JRadioButton rBForest;
@@ -27,15 +18,17 @@ public class ThemeSettings {
     HighContrastTheme highcontrast = new HighContrastTheme();
 
 
-    public ThemeSettings(JRadioButton classicRadioButton, JRadioButton forestRadioButton, JRadioButton highContrastRadioButton, JPanel mainpanel, JPanel boardpanel, JButton[] button, JPanel settingspanel) {
+    public ThemeSettings(JRadioButton classicRadioButton, JRadioButton forestRadioButton, JRadioButton highContrastRadioButton, JPanel mainpanel, JPanel boardpanel, JButton[] button, JPanel settingspanel, JLabel Theme) {
         this.mainpanel = mainpanel;
         this.boardpanel = boardpanel;
         this.settingspanel = settingspanel;
         this.button = button;
+        this.Theme = Theme;
         rBClassic = classicRadioButton;
         rBForest = forestRadioButton;
         rBHighContrast = highContrastRadioButton;
         chooseThemeButton();
+
     }
 
     private void chooseThemeButton() {
@@ -48,25 +41,21 @@ public class ThemeSettings {
         rBClassic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                classic.getProperty(mainpanel, boardpanel, settingspanel, button);
+                classic.getProperty(mainpanel, boardpanel, settingspanel, button,Theme);
 
             }
         });
         rBForest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                forest.getProperty(mainpanel, boardpanel, settingspanel, button);
+                forest.getProperty(mainpanel, boardpanel, settingspanel, button,Theme,rBForest,rBClassic,rBHighContrast);
             }
         });
         rBHighContrast.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                highcontrast.getProperty(mainpanel, boardpanel, settingspanel, button);
+                highcontrast.getProperty(mainpanel, boardpanel, settingspanel, button,Theme,rBForest,rBClassic,rBHighContrast);
             }
         });
-//
-
-
-
     }
 }
