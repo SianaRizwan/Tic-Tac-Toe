@@ -13,10 +13,7 @@ public class ThemeSettings {
     private JRadioButton rBForest;
     private JRadioButton rBHighContrast;
 
-    ClassicTheme classic = new ClassicTheme();
-    ForestTheme forest = new ForestTheme();
-    HighContrastTheme highcontrast = new HighContrastTheme();
-
+    SetTheme choosetheme;
 
     public ThemeSettings(JRadioButton classicRadioButton, JRadioButton forestRadioButton, JRadioButton highContrastRadioButton, JPanel mainpanel, JPanel boardpanel, JButton[] button, JPanel settingspanel, JLabel Theme) {
         this.mainpanel = mainpanel;
@@ -41,20 +38,24 @@ public class ThemeSettings {
         rBClassic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                classic.getProperty(mainpanel, boardpanel, settingspanel, button,Theme);
+                choosetheme = new ClassicTheme();
+                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
+
 
             }
         });
         rBForest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                forest.getProperty(mainpanel, boardpanel, settingspanel, button,Theme,rBForest,rBClassic,rBHighContrast);
+                choosetheme = new ForestTheme(rBClassic, rBForest, rBHighContrast);
+                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
             }
         });
         rBHighContrast.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                highcontrast.getProperty(mainpanel, boardpanel, settingspanel, button,Theme,rBForest,rBClassic,rBHighContrast);
+                choosetheme = new HighContrastTheme(rBClassic, rBForest, rBHighContrast);
+                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
             }
         });
     }

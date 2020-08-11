@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ClassicTheme {
+public class ClassicTheme implements SetTheme {
 
 
-    private JButton[] button;
+
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
     public void getProperty(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
