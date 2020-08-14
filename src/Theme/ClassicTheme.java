@@ -1,8 +1,9 @@
+package Theme;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ClassicTheme implements SetTheme {
-
+public class ClassicTheme implements ITheme {
 
 
     Font f1 = new Font("Arial", Font.BOLD, 30);

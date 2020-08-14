@@ -1,7 +1,9 @@
+package Theme;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class HighContrastTheme implements SetTheme {
+public class HighContrastTheme implements ITheme {
 
     Font f1 = new Font("Arial", Font.BOLD, 30);
     private JRadioButton rBClassic;

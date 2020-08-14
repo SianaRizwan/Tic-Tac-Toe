@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+
 public class Computer implements IButtonListener {
     private int[][] btnRelation = new int[3][3];
 
@@ -43,17 +44,16 @@ public class Computer implements IButtonListener {
         while (true) {
             //loopCounter++;
             //System.out.println("OUTSIDE LOOP COUNTER "+ loopCounter);
-            if(loopCounter == 500)
-            {
-                System.out.println("INSIDE IF LOOP CROSSED "+ loopCounter);
+            if (loopCounter == 500) {
+                System.out.println("INSIDE IF LOOP CROSSED " + loopCounter);
                 break;
             }
-            System.out.println("OUTSIDE IF ELSE Freespot inside Computer: "+btnCoord);
-            System.out.println("OUTSIDE IF I:"+ai_i+" J:"+ai_j+ "Gameboard Current State: "+GameLogic.currentState[btnCoord]+" Board: "+Board);
+            System.out.println("OUTSIDE IF ELSE Freespot inside Players.Computer.Players.Computer: " + btnCoord);
+            System.out.println("OUTSIDE IF I:" + ai_i + " J:" + ai_j + "Gameboard Current State: " + GameLogic.currentState[btnCoord] + " Board: " + Board);
             if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
-                System.out.println("INSIDE IF I:"+ai_i+" J:"+ai_j);
+                System.out.println("INSIDE IF I:" + ai_i + " J:" + ai_j);
                 //System.out.println("Inside loop else - AI I: " + ai_i + " AI J: " + ai_j+" Board"+ Board+ "Button Cordinate: "+btnCoord);
-                //System.out.println("Freespot inside Computer: "+btnCoord);
+                //System.out.println("Freespot inside Players.Computer.Players.Computer: "+btnCoord);
                 //System.out.println("Inside loop if - AI I: " + ai_i + " AI J: " + ai_j);
                 GameLogic.currentState[btnCoord] = 500;
                 calledButton[btnCoord].setText(computerMove);

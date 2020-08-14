@@ -1,7 +1,9 @@
+package Theme;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ForestTheme implements SetTheme {
+public class ForestTheme implements ITheme {
 
     Font f1 = new Font("Arial", Font.BOLD, 30);
     private JRadioButton rBClassic;
@@ -30,7 +32,9 @@ public class ForestTheme implements SetTheme {
             button[i].setBackground(new Color(181,245,171));
             button[i].setForeground(Color.BLACK);
         }
+
         setrb();
     }
 
 }
+

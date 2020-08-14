@@ -1,3 +1,8 @@
+import Theme.ClassicTheme;
+import Theme.ForestTheme;
+import Theme.HighContrastTheme;
+import Theme.ITheme;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +18,7 @@ public class ThemeSettings {
     private JRadioButton rBForest;
     private JRadioButton rBHighContrast;
 
-    SetTheme choosetheme;
+    ITheme choosetheme;
 
     public ThemeSettings(JRadioButton classicRadioButton, JRadioButton forestRadioButton, JRadioButton highContrastRadioButton, JPanel mainpanel, JPanel boardpanel, JButton[] button, JPanel settingspanel, JLabel Theme) {
         this.mainpanel = mainpanel;
