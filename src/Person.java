@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class Person implements IButtonListener {
+public class Person implements IAi {
 
     private JButton[] calledButton;
     int[][] btnCoord = new int[1][2];
@@ -14,7 +14,7 @@ public class Person implements IButtonListener {
     }
 
     @Override
-    public void currentButton(ActionEvent e) {
+    public void makeMove(ActionEvent e) {
         //get the particular button that was clicked
         for (int i = 0; i < 9; i++) {
             if (e.getSource() == calledButton[i]) {

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
-public class Computer implements IButtonListener {
+public class RandomAi implements IAi {
     private int[][] btnRelation = new int[3][3];
 
     int loopCounter = 0;
@@ -16,14 +16,15 @@ public class Computer implements IButtonListener {
     String[][] calledBoard = new String[3][3];
 
 
-    Computer(JButton[] button, String[][] board) {
+    RandomAi(JButton[] button, String[][] board) {
 
         calledButton = button;
         calledBoard = board;
+        System.out.println("Insyd RandomAi");
     }
 
     @Override
-    public void currentButton(ActionEvent e) {
+    public void makeMove(ActionEvent e) {
 
         int k = 0;
         for (int i = 0; i < 3; i++) {

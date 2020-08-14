@@ -15,25 +15,25 @@ public class GameBoard extends JFrame{
     private JButton middleCenter;
     private JButton middleRight;
     private JButton[] button = new JButton[]{upperLeft, upperMiddle, upperRight, middleLeft, middleCenter, middleRight, lowerLeft, lowerMiddle, lowerRight};
-    private JButton startWithDefensiveAIButton;
     private JRadioButton classicRadioButton;
     private JRadioButton forestRadioButton;
     private JRadioButton highContrastRadioButton;
-    private JButton startWithRandomAIButton;
     private JRadioButton[] themeButtons;
     private JLabel Theme;
     private JButton exitButton;
     private JPanel boardpanel;
     private JPanel settingspanel;
     private JPanel mainpanel;
+    private JButton startWithDefensiveAIButton;
+    private JButton startWithRandomAIButton;
     GameLogic logic;
     ThemeSettings theme;
+    AiSettings chooseAi;
 
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
 
-
-    public GameBoard(JFrame frame){
+    public GameBoard(JFrame frame) {
 
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -42,7 +42,8 @@ public class GameBoard extends JFrame{
             }
         });
         logic = new GameLogic(mainpanel,boardpanel,button,frame);
-        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+        theme = new ThemeSettings(classicRadioButton, forestRadioButton, highContrastRadioButton, mainpanel, boardpanel, button, settingspanel, Theme);
+        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
         initComponents();
     }
 
