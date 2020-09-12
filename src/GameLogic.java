@@ -43,6 +43,7 @@ public class GameLogic {
     public JButton[] button = new JButton[]{btn_upperLeft, btn_upperMiddle, btn_upperRight,
             btn_lowerLeft, btn_lowerMiddle, btn_lowerRight,
             btn_middleLeft, btn_middleCenter, btn_middleRight};
+//    static JButton[] sbutton = button;
 
     public Person player;
     public RandomAi randomAi;
@@ -140,12 +141,12 @@ public class GameLogic {
                 player.makeMove(e);
                 freeSpots--;
                 turn++;
-                //testCounter++;
-                //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
+
                 checkGameWinner();
             }
 
             if (!winner_player(playerMarkObj) && (turn % 2 != 0) && (freeSpots % 2 == 0)) {
+//                delayMove();
                 if (aiType == 0) {
                     randomAi.makeMove(e);
                 } else if (aiType == 1) {
@@ -162,6 +163,8 @@ public class GameLogic {
             }
 
         }
+
+
 
         public void lockboard() {
             for (int i = 0; i < 9; i++) {

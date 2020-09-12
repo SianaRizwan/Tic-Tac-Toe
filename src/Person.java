@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 public class Person implements IAi {
 
     private JButton[] calledButton;
+    public BtnCoordinate btnCoordinate = new BtnCoordinate();
     int[][] btnCoord = new int[1][2];
     String[][] calledBoard = new String[3][3];
     String playerMove = "X";
@@ -21,9 +22,10 @@ public class Person implements IAi {
                 GameLogic.currentState[i] = 500;
                 calledButton[i].setText(playerMove);
                 calledButton[i].setEnabled(false);
-                btnCoord = getButtonCoordinate(i);
+                btnCoord = btnCoordinate.getButtonCoordinate(i);
                 //System.out.println("Array"+btnCoord[0][0]+ " Array"+ btnCoord[0][1]);
                 calledBoard[btnCoord[0][0]][btnCoord[0][1]] = playerMove;
+//                delayMove();
                 break;
             }
         }
@@ -35,60 +37,19 @@ public class Person implements IAi {
 
 
     }
+//    public void delayMove() {
+//        System.out.println(".-----..-..-..-..-..-..-..-..-..-..-. .--.          \n" +
+//                "`-. .-': :; :: :: `: :: :' ;: :: `: :: .--'         \n" +
+//                "  : :  :    :: :: .` ::   ' : :: .` :: : _          \n" +
+//                "  : :  : :: :: :: :. :: :.`.: :: :. :: :; : _  _  _ \n" +
+//                "  :_;  :_;:_;:_;:_;:_;:_;:_;:_;:_;:_;`.__.':_;:_;:_;");
+//        try {
+//            Thread.sleep(1500);
+//        } catch (InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+//
+//        }
+//    }
 
-    public int[][] getButtonCoordinate(int i) {
-        int[][] coord = new int[1][2]; // x, y
-        switch (i) {
-            case 0:
-                coord[0][0] = 0;
-                coord[0][1] = 0;
-                break;
 
-            case 1:
-                coord[0][0] = 0;
-                coord[0][1] = 1;
-                break;
-
-            case 2:
-                coord[0][0] = 0;
-                coord[0][1] = 2;
-                break;
-
-            case 3:
-                coord[0][0] = 1;
-                coord[0][1] = 0;
-                break;
-
-            case 4:
-                coord[0][0] = 1;
-                coord[0][1] = 1;
-                break;
-
-            case 5:
-                coord[0][0] = 1;
-                coord[0][1] = 2;
-                break;
-
-            case 6:
-                coord[0][0] = 2;
-                coord[0][1] = 0;
-                break;
-
-            case 7:
-                coord[0][0] = 2;
-                coord[0][1] = 1;
-                break;
-
-            case 8:
-                coord[0][0] = 2;
-                coord[0][1] = 2;
-                break;
-
-            default:
-                //System.out.println("Error");
-                break;
-        }
-        return coord;
-
-    }
 }
