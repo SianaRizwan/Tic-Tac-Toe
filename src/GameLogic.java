@@ -134,6 +134,7 @@ public class GameLogic {
 
     }
 
+
     public class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -141,12 +142,11 @@ public class GameLogic {
                 player.makeMove(e);
                 freeSpots--;
                 turn++;
-
                 checkGameWinner();
             }
 
             if (!winner_player(playerMarkObj) && (turn % 2 != 0) && (freeSpots % 2 == 0)) {
-//                delayMove();
+
                 if (aiType == 0) {
                     randomAi.makeMove(e);
                 } else if (aiType == 1) {
@@ -157,8 +157,6 @@ public class GameLogic {
 
                 freeSpots--;
                 turn++;
-                //testCounter++;
-                //System.out.println("Test Counter: "+testCounter+ " Freespots:"+freeSpots);
                 checkGameWinner();
             }
 
@@ -178,23 +176,20 @@ public class GameLogic {
             if (winner_player(playerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, xWon);
-//                initboard(); //Refresh Board
                 restartGame();
             } else if (winner_player(computerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, yWon);
-//                initboard(); //Refresh Board
                 restartGame();
             } else if (freeSpots == 0) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, tie);
-//                initboard(); //Refresh Board
                 restartGame();
             }
         }
 
         //    Game Logic
-        private boolean winner_player(String player) {
+        public boolean winner_player(String player) {
             for (int i = 0; i < 3; i++) {
 
 //                Test winning Condition

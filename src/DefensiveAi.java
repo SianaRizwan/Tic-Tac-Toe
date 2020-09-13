@@ -3,28 +3,27 @@ import java.awt.event.ActionEvent;
 
 public class DefensiveAi implements IAi {
 
+    int[][] btnCoordfromNumber = new int[1][2];
     private int[][] btnRelation = new int[3][3];
-    int noSmartMove = 0;
-    int[] iSet = {1,0,0,2,2,0,1,1,2};
-    int[] jSet = {1,0,2,0,2,1,0,2,1};
+    GameLogic.ButtonListener buttonListener;
+    String Board;
 
-//    private int[][] preferredMoves = {
-//         {1, 1}, {0, 0}, {0, 2}, {2, 0}, {2, 2},
-//         {0, 1}, {1, 0}, {1, 2}, {2, 1}};
-
+    BtnCoordinate btnCoordinate;
     int loopCounter = 0;
     String computerMove = "O";
     String str = "";
-    String emptyString = new String(str);
+    String emptyString = str;
     String str1 = "X";
-    String playerValue = new String(str1);
+    String playerValue = str1;
     int ai_i, ai_j;
     public JButton[] calledButton;
-    String[][] calledBoard = new String[3][3];
+    String[][] calledBoard;
+    int btnCoord;
 
 
     DefensiveAi(JButton[] button, String[][] board) {
 
+        btnCoordinate = new BtnCoordinate();
         calledButton = button;
         calledBoard = board;
         System.out.println("Inside Defensive");
@@ -41,81 +40,156 @@ public class DefensiveAi implements IAi {
         }
 
 
-        int pointer = 0;
-        getNextMove(pointer);
-
-        System.out.println("AI_I: "+ai_i+" AI_J: "+ai_j);
+        getNextMove();
         int btnCoord = btnRelation[ai_i][ai_j];
-        String Board = new String(calledBoard[ai_i][ai_j]);
+        Board = calledBoard[ai_i][ai_j];
+        int counter = 0;
 
         while (true) {
-            getNextMove(pointer);
+            System.out.println("LOOP COUNTER : ");
             if (loopCounter == 500) {
                 break;
-            }
-
-          if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
-                System.out.println("INSIDE(DEFENSIVE) IF I:" + ai_i + " J:" + ai_j);
-
-                GameLogic.currentState[btnCoord] = 500;
+            } else {
+//            @TODO RANDOM AI CLASS NEEDS TO BE ADDED
+                ai_i = (int) (Math.random() * 3);
+                ai_j = (int) (Math.random() * 3);
+                Board = calledBoard[ai_i][ai_j];
+                btnCoord = btnRelation[ai_i][ai_j];
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
                 calledBoard[ai_i][ai_j] = computerMove;
+            }
+            if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
+                GameLogic.currentState[btnCoord] = 500;
                 loopCounter = 0;
                 break;
-
             } else {
-
-                System.out.println("INSIDE(DEFENSIVE) ELSE I:" + ai_i + " J:" + ai_j);
-                if(noSmartMove == 0) {
-                    getNextMove(pointer);
-                    Board = new String(calledBoard[ai_i][ai_j]);
-                    btnCoord = btnRelation[ai_i][ai_j];
-                }else
-                {
-                    ai_i = (int) (Math.random() * 3);
-                    ai_j = (int) (Math.random() * 3);
-                    System.out.println("INSIDE ELSE of ELSE --------------- I:" + ai_i + " J:" + ai_j);
-                    Board = new String(calledBoard[ai_i][ai_j]);
-                    btnCoord = btnRelation[ai_i][ai_j];
-                }
-
-
-
-                //System.out.println("Inside loop else - AI I: " + ai_i + " AI J: " + ai_j+" Board"+ Board+ "Button Cordinate: "+btnCoord);
+                getNextMove();
+                Board = calledBoard[ai_i][ai_j];
+                btnCoord = btnRelation[ai_i][ai_j];
             }
-
         }
         loopCounter = 0;
 
     }
 
-    public void getNextMove(int pointer)
-    {
-        if(iSet[pointer] != -1 && jSet[pointer] != -1)
-        {
-            System.out.println("INSIDE IF IF --------------- I:" + ai_i + " J:" + ai_j);
-
-//            Player Halting Logic
-//            if(X X O, X O X)
-//            {
-//
-//            }
-
-//            Preferred, ELSE
-            ai_i = iSet[pointer];
-            ai_j = jSet[pointer];
-            iSet[pointer] = -1;
-            jSet[pointer] = -1;
-//            noSmartMove = 0;
-            pointer ++;
+    public void getNextMove() {
+        if (isPersonWinning()) {
+            ai_i = btnCoordfromNumber[0][0];
+            ai_j = btnCoordfromNumber[0][1];
+        } else if (hasBestMove()) {
+            ai_i = btnCoordfromNumber[0][0];
+            ai_j = btnCoordfromNumber[0][1];
         }
-        else
-        {
-            noSmartMove = 1;
-        }
-
     }
 
 
+    public boolean isPersonWinning() {
+        int counter = 0;
+
+        //Row
+        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[0][1].equals(playerValue)) && (calledButton[2].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(2);
+
+            return true;
+        }
+        if ((calledBoard[1][0].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[5].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(5);
+
+            return true;
+        }
+        if ((calledBoard[2][0].equals(playerValue)) && (calledBoard[2][1].equals(playerValue)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+
+        //Column
+        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[1][0].equals(playerValue)) && (calledButton[6].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
+
+            return true;
+        }
+        if ((calledBoard[0][1].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[7].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(7);
+
+            return true;
+        }
+        if ((calledBoard[0][2].equals(playerValue)) && (calledBoard[1][2].equals(playerValue)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+
+        //Diagonal left
+        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+        //Diagonal right
+        if ((calledBoard[0][2].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[6].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasBestMove() {
+        int counter = 0;
+
+        //Row
+        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[0][1].equals(computerMove)) && (calledButton[2].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(2);
+
+            return true;
+        }
+        if ((calledBoard[1][0].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[5].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(5);
+
+            return true;
+        }
+        if ((calledBoard[2][0].equals(computerMove)) && (calledBoard[2][1].equals(computerMove)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+
+        //Column
+        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[1][0].equals(computerMove)) && (calledButton[6].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
+
+            return true;
+        }
+        if ((calledBoard[0][1].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[7].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(7);
+
+            return true;
+        }
+        if ((calledBoard[0][2].equals(computerMove)) && (calledBoard[1][2].equals(computerMove)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+
+        //Diagonal left
+        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[8].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
+
+            return true;
+        }
+        //Diagonal right
+        if ((calledBoard[0][2].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[6].getText() == "")) {
+            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
+
+            return true;
+        }
+        return false;
+    }
 }
+
+//
+
+
+
