@@ -1,32 +1,22 @@
+import Players.DefensiveAi;
+import Players.HumanPlayer;
+import Players.RandomAi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameLogic {
-    //  Buttons
-    private JButton btn_upperLeft;
-    private JButton btn_upperMiddle;
-    private JButton btn_upperRight;
-    private JButton btn_lowerLeft;
-    private JButton btn_lowerMiddle;
-    private JButton btn_lowerRight;
-    private JButton btn_middleLeft;
-    private JButton btn_middleCenter;
-    private JButton btn_middleRight;
-
 
     private JPanel settingspanel;
     private JButton startWithDefensiveAIButton;
     private JButton startWithRandomAIButton;
 
-
     //    END GAME TEXTS
     private String xWon = "Player Won!";
     private String yWon = "Computer Won!";
     private String tie = "It's a TIE!";
-
-//    public static int aiType = 0;
 
     //  Varibles
     int freeSpots = 9;
@@ -45,41 +35,36 @@ public class GameLogic {
     //  UI
     private JPanel boardpanel;
     private JPanel mainpanel;
-    public JButton[] button = new JButton[]{btn_upperLeft, btn_upperMiddle, btn_upperRight,
-            btn_lowerLeft, btn_lowerMiddle, btn_lowerRight,
-            btn_middleLeft, btn_middleCenter, btn_middleRight};
+    private JFrame frame;
+    public JButton[] button;
 
 
-    public Person player;
+    public HumanPlayer player;
     public RandomAi randomAi;
     public DefensiveAi defensiveAi;
+    public AiSettings aiSettings;
+
+
+    public int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
 
 
-    public static int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-
-
-    AiSettings aiSettings;
 
     public GameLogic(JPanel mainpanel, JPanel boardpanel, JButton[] button, JFrame frame) {
         this.mainpanel = mainpanel;
         this.boardpanel = boardpanel;
         this.button = button;
-
         welcomeMessage();
         initboard();
         initButton(this.button, true, f1, startgame);
-
-
-        player = new Person(this.button, board);
         aiSettings  = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
-        randomAi = new RandomAi(this.button, board);
-        defensiveAi = new DefensiveAi(this.button, board);
+        player = new HumanPlayer(this.button, board,currentState);
+        randomAi = new RandomAi(this.button, board,currentState);
+        defensiveAi = new DefensiveAi(this.button, board,currentState);
 
     }
 
     private void restartGame() {
-
         JFrame frame = new JFrame();
         new GameBoard(frame);
         freeSpots = 9;
@@ -88,9 +73,9 @@ public class GameLogic {
         for (int i = 0; i < currentState.length; i++) {
             currentState[i] = -1;
         }
-        player = new Person(this.button, board);
-        randomAi = new RandomAi(this.button, board);
-        defensiveAi = new DefensiveAi(this.button, board);
+        player = new HumanPlayer(this.button, board, currentState);
+        randomAi = new RandomAi(this.button, board, currentState);
+        defensiveAi = new DefensiveAi(this.button, board, currentState);
 
     }
 
@@ -138,22 +123,13 @@ public class GameLogic {
             }
 
             if (!winner_player(playerMarkObj) && (turn % 2 != 0) && (freeSpots % 2 == 0)) {
-
-                if (AiSettings.Type == 0) {
-//                    System.out.println("AISETTINGS TYPE: "+aiSettings.getType());
-//                    System.out.println("Random AI making move");
-                    randomAi.makeMove(e);
-                } else {
-                    System.out.println("AISETTINGS TYPE: "+aiSettings.getType());
-                    System.out.println("Defensive AI making move");
+                if(aiSettings.getType() == 1){
                     defensiveAi.makeMove(e);
+                } else if(aiSettings.getType() == 0) {
+                    randomAi.makeMove(e);
                 }
-
-
-
                 freeSpots--;
                 turn++;
-
                 checkGameWinner();
             }
 
@@ -168,21 +144,17 @@ public class GameLogic {
 
 
         public void checkGameWinner() {
-
             if (winner_player(playerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, xWon);
-
                 restartGame();
             } else if (winner_player(computerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, yWon);
-
                 restartGame();
             } else if (freeSpots == 0) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, tie);
-
                 restartGame();
             }
         }
@@ -190,8 +162,6 @@ public class GameLogic {
         //    Game Logic
         private boolean winner_player(String player) {
             for (int i = 0; i < 3; i++) {
-
-
                 //Row
                 if ((board[i][0].equals(player)) && (board[i][1].equals(player)) && (board[i][2].equals(player))) {
                     return true;
@@ -200,8 +170,6 @@ public class GameLogic {
                 if ((board[0][i].equals(player)) && (board[1][i].equals(player)) && (board[2][i].equals(player))) {
                     return true;
                 }
-
-
                 //Diagonal left
                 if ((board[0][0].equals(player)) && (board[1][1].equals(player)) && (board[2][2].equals(player))) {
                     return true;

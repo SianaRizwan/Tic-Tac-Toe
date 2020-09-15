@@ -1,3 +1,5 @@
+package Players;
+
 public class BtnCoordinate {
     int[][] coord = new int[1][2];
     BtnCoordinate()
@@ -53,7 +55,6 @@ public class BtnCoordinate {
                 break;
 
             default:
-                //System.out.println("Error");
                 break;
         }
         return coord;

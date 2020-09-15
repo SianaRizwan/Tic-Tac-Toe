@@ -43,9 +43,8 @@ public class ThemeSettings {
         rBClassic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                choosetheme = new ClassicTheme();
+                choosetheme = new ClassicTheme(rBClassic, rBForest, rBHighContrast);
                 choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
-
 
             }
         });

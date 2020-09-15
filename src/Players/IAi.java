@@ -1,3 +1,5 @@
+package Players;
+
 import java.awt.event.ActionEvent;
 
 public interface IAi {

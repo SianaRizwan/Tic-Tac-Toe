@@ -1,30 +1,30 @@
+package Players;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class DefensiveAi implements IAi {
 
-    int[][] btnCoordfromNumber = new int[1][2];
     private int[][] btnRelation = new int[3][3];
 
     String Board;
 
     BtnCoordinate btnCoordinate;
-    int loopCounter = 0;
     String computerMove = "O";
-    String str = "";
-    String emptyString = str;
-    String str1 = "X";
-    String playerValue = str1;
+    String emptyString = "";
+    String playerMove = "X";
     int ai_i, ai_j;
     public JButton[] calledButton;
     String[][] calledBoard;
     int btnCoord;
+    public int[] newState;
 
 
-    DefensiveAi(JButton[] button, String[][] board) {
+    public DefensiveAi(JButton[] button, String[][] board, int[] currentState) {
         btnCoordinate = new BtnCoordinate();
         calledButton = button;
         calledBoard = board;
+        newState = currentState;
     }
 
     @Override
@@ -41,26 +41,22 @@ public class DefensiveAi implements IAi {
 
         while (true) {
 
-            if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
-//                System.out.println("Inside if of While loop: \n Button Coordination: "+btnCoord+"\n CalledButton[btnCoord]: "+calledBoard[ai_i][ai_j]);
-
+            if ((Board.equals(emptyString) && newState [btnCoord] == -1)) {
                 isPersonWinning();
                 btnCoord = btnRelation[ai_i][ai_j];
-                GameLogic.currentState[btnCoord] = 500;
+                newState [btnCoord] = 500;
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
                 calledBoard[ai_i][ai_j] = computerMove;
                 break;
             } else {
-
-//                System.out.println("Inside ELSE of While loop: \n Button Coordination: "+btnCoord+"\n CalledButton[btnCoord]: "+calledBoard[ai_j][ai_j]);
                 isPersonWinning();
                 Board = computerMove;
                 btnCoord = btnRelation[ai_i][ai_j];
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
                 calledBoard[ai_i][ai_j] = computerMove;
-                GameLogic.currentState[btnCoord] = 500;
+                newState [btnCoord] = 500;
                 break;
 
             }
@@ -70,27 +66,21 @@ public class DefensiveAi implements IAi {
     public void isPersonWinning() {
         ai_i = (int) (Math.random() * 3);
         ai_j = (int) (Math.random() * 3);
-        System.out.println("Random AI_I and AI_J: "+ai_i+" "+ai_j);
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 3; column++) {
-//                System.out.println("Calledboard Value before if: " + calledBoard[row][column]);
                 if (calledBoard[row][column].equals("")) {
                     calledBoard[row][column] = "X";
-                    if (winner_player("X")) {
-                        System.out.println("Inside if");
-                        ai_i = row;
+                    if (winner_player(playerMove)) {
+                       ai_i = row;
                         ai_j = column;
-                        System.out.println("STOPWINNING AI_I and AI_J: "+ai_i+" "+ai_j);
-                    }
+                         }
                     calledBoard[row][column] = "";
                 }
                 if(calledBoard[ai_i][ai_j].equals("X"))
                 {
-                    System.out.println("Calledboard if X: "+calledBoard[row][column]);
                     ai_i = (int) (Math.random() * 3);
                     ai_j = (int) (Math.random() * 3);
-                    System.out.println("NEWRandom AI_I and AI_J: "+ai_i+" "+ai_j);
-                }
+                    }
             }
         }
 
