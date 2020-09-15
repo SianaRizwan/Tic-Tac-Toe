@@ -5,7 +5,7 @@ public class DefensiveAi implements IAi {
 
     int[][] btnCoordfromNumber = new int[1][2];
     private int[][] btnRelation = new int[3][3];
-    GameLogic.ButtonListener buttonListener;
+
     String Board;
 
     BtnCoordinate btnCoordinate;
@@ -22,11 +22,9 @@ public class DefensiveAi implements IAi {
 
 
     DefensiveAi(JButton[] button, String[][] board) {
-
         btnCoordinate = new BtnCoordinate();
         calledButton = button;
         calledBoard = board;
-        System.out.println("Inside Defensive");
     }
 
     @Override
@@ -38,158 +36,93 @@ public class DefensiveAi implements IAi {
                 k++;
             }
         }
-
-
-        getNextMove();
-        int btnCoord = btnRelation[ai_i][ai_j];
+        btnCoord = btnRelation[ai_i][ai_j];
         Board = calledBoard[ai_i][ai_j];
-        int counter = 0;
 
         while (true) {
-            System.out.println("LOOP COUNTER : ");
-            if (loopCounter == 500) {
+
+            if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
+//                System.out.println("Inside if of While loop: \n Button Coordination: "+btnCoord+"\n CalledButton[btnCoord]: "+calledBoard[ai_i][ai_j]);
+
+                isPersonWinning();
+                btnCoord = btnRelation[ai_i][ai_j];
+                GameLogic.currentState[btnCoord] = 500;
+                calledButton[btnCoord].setText(computerMove);
+                calledButton[btnCoord].setEnabled(false);
+                calledBoard[ai_i][ai_j] = computerMove;
                 break;
             } else {
-//            @TODO RANDOM AI CLASS NEEDS TO BE ADDED
-                ai_i = (int) (Math.random() * 3);
-                ai_j = (int) (Math.random() * 3);
-                Board = calledBoard[ai_i][ai_j];
+
+//                System.out.println("Inside ELSE of While loop: \n Button Coordination: "+btnCoord+"\n CalledButton[btnCoord]: "+calledBoard[ai_j][ai_j]);
+                isPersonWinning();
+                Board = computerMove;
                 btnCoord = btnRelation[ai_i][ai_j];
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
                 calledBoard[ai_i][ai_j] = computerMove;
-            }
-            if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
                 GameLogic.currentState[btnCoord] = 500;
-                loopCounter = 0;
                 break;
-            } else {
-                getNextMove();
-                Board = calledBoard[ai_i][ai_j];
-                btnCoord = btnRelation[ai_i][ai_j];
+
             }
         }
-        loopCounter = 0;
+    }
+
+    public void isPersonWinning() {
+        ai_i = (int) (Math.random() * 3);
+        ai_j = (int) (Math.random() * 3);
+        System.out.println("Random AI_I and AI_J: " + ai_i + " " + ai_j);
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 3; column++) {
+//                System.out.println("Calledboard Value before if: " + calledBoard[row][column]);
+                if (calledBoard[row][column].equals("")) {
+                    calledBoard[row][column] = "X";
+                    if (winner_player("X")) {
+                        System.out.println("Inside if");
+                        ai_i = row;
+                        ai_j = column;
+                        System.out.println("STOPWINNING AI_I and AI_J: " + ai_i + " " + ai_j);
+                    }
+                    calledBoard[row][column] = "";
+                }
+                if (calledBoard[ai_i][ai_j].equals("X")) {
+                    System.out.println("Calledboard if X: " + calledBoard[row][column]);
+                    ai_i = (int) (Math.random() * 3);
+                    ai_j = (int) (Math.random() * 3);
+                    System.out.println("NEWRandom AI_I and AI_J: " + ai_i + " " + ai_j);
+                }
+            }
+        }
 
     }
 
-    public void getNextMove() {
-        if (isPersonWinning()) {
-            ai_i = btnCoordfromNumber[0][0];
-            ai_j = btnCoordfromNumber[0][1];
-        } else if (hasBestMove()) {
-            ai_i = btnCoordfromNumber[0][0];
-            ai_j = btnCoordfromNumber[0][1];
-        }
-    }
+    private boolean winner_player(String player) {
+        for (int i = 0; i < 3; i++) {
+            //Row
+            if ((calledBoard[i][0].equals(player)) && (calledBoard[i][1].equals(player)) && (calledBoard[i][2].equals(player))) {
+                return true;
+            }
+            //Column
+            if ((calledBoard[0][i].equals(player)) && (calledBoard[1][i].equals(player)) && (calledBoard[2][i].equals(player))) {
+                return true;
+            }
 
 
-    public boolean isPersonWinning() {
-        int counter = 0;
-
-        //Row
-        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[0][1].equals(playerValue)) && (calledButton[2].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(2);
-
-            return true;
-        }
-        if ((calledBoard[1][0].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[5].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(5);
-
-            return true;
-        }
-        if ((calledBoard[2][0].equals(playerValue)) && (calledBoard[2][1].equals(playerValue)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
+            //Diagonal left
+            if ((calledBoard[0][0].equals(player)) && (calledBoard[1][1].equals(player)) && (calledBoard[2][2].equals(player))) {
+                return true;
+            }
+            //Diagonal right
+            if ((calledBoard[0][2].equals(player)) && (calledBoard[1][1].equals(player)) && (calledBoard[2][0].equals(player))) {
+                return true;
+            }
         }
 
-        //Column
-        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[1][0].equals(playerValue)) && (calledButton[6].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
-
-            return true;
-        }
-        if ((calledBoard[0][1].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[7].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(7);
-
-            return true;
-        }
-        if ((calledBoard[0][2].equals(playerValue)) && (calledBoard[1][2].equals(playerValue)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
-        }
-
-        //Diagonal left
-        if ((calledBoard[0][0].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
-        }
-        //Diagonal right
-        if ((calledBoard[0][2].equals(playerValue)) && (calledBoard[1][1].equals(playerValue)) && (calledButton[6].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
-
-            return true;
-        }
         return false;
     }
 
-    public boolean hasBestMove() {
-        int counter = 0;
-
-        //Row
-        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[0][1].equals(computerMove)) && (calledButton[2].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(2);
-
-            return true;
-        }
-        if ((calledBoard[1][0].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[5].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(5);
-
-            return true;
-        }
-        if ((calledBoard[2][0].equals(computerMove)) && (calledBoard[2][1].equals(computerMove)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
-        }
-
-        //Column
-        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[1][0].equals(computerMove)) && (calledButton[6].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
-
-            return true;
-        }
-        if ((calledBoard[0][1].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[7].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(7);
-
-            return true;
-        }
-        if ((calledBoard[0][2].equals(computerMove)) && (calledBoard[1][2].equals(computerMove)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
-        }
-
-        //Diagonal left
-        if ((calledBoard[0][0].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[8].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(8);
-
-            return true;
-        }
-        //Diagonal right
-        if ((calledBoard[0][2].equals(computerMove)) && (calledBoard[1][1].equals(computerMove)) && (calledButton[6].getText() == "")) {
-            btnCoordfromNumber = btnCoordinate.getButtonCoordinate(6);
-
-            return true;
-        }
-        return false;
-    }
 }
 
-//
+
 
 
 

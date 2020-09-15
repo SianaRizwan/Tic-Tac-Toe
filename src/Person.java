@@ -23,33 +23,15 @@ public class Person implements IAi {
                 calledButton[i].setText(playerMove);
                 calledButton[i].setEnabled(false);
                 btnCoord = btnCoordinate.getButtonCoordinate(i);
-                //System.out.println("Array"+btnCoord[0][0]+ " Array"+ btnCoord[0][1]);
+
                 calledBoard[btnCoord[0][0]][btnCoord[0][1]] = playerMove;
-//                delayMove();
+
                 break;
             }
         }
-
-//        // For Testing
-//        System.out.println("Flag " + flag);
-//        System.out.println("Value: " + buttonClicked);
-//        System.out.println("Button Click " + buttonClicked);
-
-
     }
-//    public void delayMove() {
-//        System.out.println(".-----..-..-..-..-..-..-..-..-..-..-. .--.          \n" +
-//                "`-. .-': :; :: :: `: :: :' ;: :: `: :: .--'         \n" +
-//                "  : :  :    :: :: .` ::   ' : :: .` :: : _          \n" +
-//                "  : :  : :: :: :: :. :: :.`.: :: :. :: :; : _  _  _ \n" +
-//                "  :_;  :_;:_;:_;:_;:_;:_;:_;:_;:_;:_;`.__.':_;:_;:_;");
-//        try {
-//            Thread.sleep(1500);
-//        } catch (InterruptedException ex) {
-//            Thread.currentThread().interrupt();
-//
-//        }
-//    }
+
+
 
 
 }
