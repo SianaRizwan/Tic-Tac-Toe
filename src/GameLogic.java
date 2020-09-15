@@ -55,6 +55,7 @@ public class GameLogic {
     public DefensiveAi defensiveAi;
 
 
+
     public static int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
 
@@ -71,7 +72,7 @@ public class GameLogic {
 
 
         player = new Person(this.button, board);
-        aiSettings = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
+        aiSettings  = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
         randomAi = new RandomAi(this.button, board);
         defensiveAi = new DefensiveAi(this.button, board);
 
@@ -143,10 +144,11 @@ public class GameLogic {
 //                    System.out.println("Random AI making move");
                     randomAi.makeMove(e);
                 } else {
-                    System.out.println("AISETTINGS TYPE: " + aiSettings.getType());
+                    System.out.println("AISETTINGS TYPE: "+aiSettings.getType());
                     System.out.println("Defensive AI making move");
                     defensiveAi.makeMove(e);
                 }
+
 
 
                 freeSpots--;

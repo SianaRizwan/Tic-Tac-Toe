@@ -9,7 +9,6 @@ public class AiSettings {
     private JButton startWithDefensiveAIButton;
     ;
     private JButton startWithRandomAIButton;
-
     public AiSettings(JPanel mainpanel, JPanel boardpanel, JButton[] button, JPanel settingspanel, JButton startWithDefensiveAIButton, JButton startWithRandomAIButton) {
         this.mainpanel = mainpanel;
         this.boardpanel = boardpanel;
@@ -34,21 +33,22 @@ public class AiSettings {
 
             System.out.println("Random AI");
             setType(0);
-            System.out.println("Type: " + Type);
+            System.out.println("Type: "+Type);
         });
 
         startWithDefensiveAIButton.addActionListener(e -> {
             System.out.println("Defensive AI");
             setType(1);
-            System.out.println("Type: " + Type);
+            System.out.println("Type: "+Type);
         });
     }
 
-    public void setType(int a) {
+    public void setType(int a)
+    {
         Type = a;
     }
-
-    public int getType() {
+    public int getType()
+    {
         return Type;
     }
 

@@ -39,6 +39,7 @@ public class RandomAi implements IAi {
         String Board = calledBoard[ai_i][ai_j];
 
 
+
         while (true) {
             if ((Board.equals(emptyString) && GameLogic.currentState[btnCoord] == -1)) {
 
@@ -59,6 +60,7 @@ public class RandomAi implements IAi {
             }
 
         }
+
 
 
     }

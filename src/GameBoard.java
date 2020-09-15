@@ -15,17 +15,16 @@ public class GameBoard extends JFrame{
     private JButton middleCenter;
     private JButton middleRight;
     private JButton[] button = new JButton[]{upperLeft, upperMiddle, upperRight, middleLeft, middleCenter, middleRight, lowerLeft, lowerMiddle, lowerRight};
+    private JButton startWithDefensiveAIButton;
     private JRadioButton classicRadioButton;
     private JRadioButton forestRadioButton;
     private JRadioButton highContrastRadioButton;
-    private JRadioButton[] themeButtons;
+    private JButton startWithRandomAIButton;
     private JLabel Theme;
     private JButton exitButton;
     private JPanel boardpanel;
     private JPanel settingspanel;
     private JPanel mainpanel;
-    private JButton startWithDefensiveAIButton;
-    private JButton startWithRandomAIButton;
     GameLogic logic;
     ThemeSettings theme;
     AiSettings chooseAi;
@@ -33,7 +32,8 @@ public class GameBoard extends JFrame{
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
 
-    public GameBoard(JFrame frame) {
+
+    public GameBoard(JFrame frame){
 
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -42,8 +42,8 @@ public class GameBoard extends JFrame{
             }
         });
         logic = new GameLogic(mainpanel,boardpanel,button,frame);
-        theme = new ThemeSettings(classicRadioButton, forestRadioButton, highContrastRadioButton, mainpanel, boardpanel, button, settingspanel, Theme);
-        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
+        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton,true);
         initComponents();
     }
 
@@ -57,20 +57,14 @@ public class GameBoard extends JFrame{
         this.setResizable(false);
         this.setContentPane(mainpanel);
         Theme.setFont(f1);
+        Theme.setForeground(Color.BLACK);
     }
 
 
     public static void main(String[] args) {
-
         JFrame frame = new JFrame();
-
         new GameBoard(frame);
 
 
-
     }
-
-
-
-
 }

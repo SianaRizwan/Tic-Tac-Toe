@@ -70,7 +70,7 @@ public class DefensiveAi implements IAi {
     public void isPersonWinning() {
         ai_i = (int) (Math.random() * 3);
         ai_j = (int) (Math.random() * 3);
-        System.out.println("Random AI_I and AI_J: " + ai_i + " " + ai_j);
+        System.out.println("Random AI_I and AI_J: "+ai_i+" "+ai_j);
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 3; column++) {
 //                System.out.println("Calledboard Value before if: " + calledBoard[row][column]);
@@ -80,21 +80,21 @@ public class DefensiveAi implements IAi {
                         System.out.println("Inside if");
                         ai_i = row;
                         ai_j = column;
-                        System.out.println("STOPWINNING AI_I and AI_J: " + ai_i + " " + ai_j);
+                        System.out.println("STOPWINNING AI_I and AI_J: "+ai_i+" "+ai_j);
                     }
                     calledBoard[row][column] = "";
                 }
-                if (calledBoard[ai_i][ai_j].equals("X")) {
-                    System.out.println("Calledboard if X: " + calledBoard[row][column]);
+                if(calledBoard[ai_i][ai_j].equals("X"))
+                {
+                    System.out.println("Calledboard if X: "+calledBoard[row][column]);
                     ai_i = (int) (Math.random() * 3);
                     ai_j = (int) (Math.random() * 3);
-                    System.out.println("NEWRandom AI_I and AI_J: " + ai_i + " " + ai_j);
+                    System.out.println("NEWRandom AI_I and AI_J: "+ai_i+" "+ai_j);
                 }
             }
         }
 
     }
-
     private boolean winner_player(String player) {
         for (int i = 0; i < 3; i++) {
             //Row
