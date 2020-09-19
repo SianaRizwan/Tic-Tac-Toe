@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 public class GameLogic {
 
+    ThemeSettings themeSettings;
+
     private JPanel settingspanel;
     private JButton startWithDefensiveAIButton;
     private JButton startWithRandomAIButton;
@@ -30,7 +32,7 @@ public class GameLogic {
     String computerMark = "O";
     String computerMarkObj = computerMark;
 
-    int turn = 0;
+
 
     //  UI
     private JPanel boardpanel;
@@ -39,10 +41,17 @@ public class GameLogic {
     public JButton[] button;
 
 
+    private JRadioButton classicRadioButton;
+    private JRadioButton forestRadioButton;
+    private JRadioButton highContrastRadioButton;
+    private JLabel Theme;
+
+
     public HumanPlayer player;
     public RandomAi randomAi;
     public DefensiveAi defensiveAi;
     public AiSettings aiSettings;
+
 
 
     public int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
@@ -61,6 +70,8 @@ public class GameLogic {
         player = new HumanPlayer(this.button, board,currentState);
         randomAi = new RandomAi(this.button, board,currentState);
         defensiveAi = new DefensiveAi(this.button, board,currentState);
+       // themeSettings = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+
 
     }
 
@@ -77,6 +88,8 @@ public class GameLogic {
         randomAi = new RandomAi(this.button, board, currentState);
         defensiveAi = new DefensiveAi(this.button, board, currentState);
 
+
+
     }
 
     private void initboard() {
@@ -86,6 +99,10 @@ public class GameLogic {
                 for (int k = 0; k < 9; k++) {
                     boardpanel.getComponent(k).setEnabled(true);
                     button[k].setText("");
+                    button[k].setPreferredSize(new Dimension(40,40));
+                    button[k].setMaximumSize(new Dimension(40,40));
+                    button[k].setMinimumSize(new Dimension(40,40));
+                    button[k].setHorizontalTextPosition(SwingConstants.CENTER);
                 }
             }
         }
@@ -113,9 +130,24 @@ public class GameLogic {
     }
 
     public class ButtonListener implements ActionListener {
+
+        int turn = 0;
         @Override
         public void actionPerformed(ActionEvent e) {
+//            System.out.println(ThemeSettings.currentTheme);
+//            if(ThemeSettings.currentTheme == 1)
+//            {
+//                themeSettings.setforestTheme();
+//            }else if(ThemeSettings.currentTheme == 2)
+//            {
+//                themeSettings.setHighContrastTheme();
+//            }
+//            else
+//            {
+//                themeSettings.setClassicTheme();
+//            }
             if (!winner_player(computerMarkObj) && (turn % 2 == 0) && (freeSpots % 2 != 0)) {
+//                e.getSource().b
                 player.makeMove(e);
                 freeSpots--;
                 turn++;

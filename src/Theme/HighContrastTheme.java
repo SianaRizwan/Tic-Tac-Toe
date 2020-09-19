@@ -27,16 +27,25 @@ public class HighContrastTheme implements ITheme {
     }
 
     @Override
-    public void getProperty(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
+    public void getBackroundColor(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
         boardpanel.setBackground(Color.LIGHT_GRAY);
         settingspanel.setBackground(Color.DARK_GRAY);
         mainpanel.setBackground(Color.DARK_GRAY);
         Theme.setFont(f1);
         Theme.setForeground(Color.WHITE);
-        for (int i = 0; i < 9; i++) {
-            button[i].setBackground(Color.WHITE);
-            button[i].setForeground(Color.WHITE);
-        }
         setrb();
+    }
+    @Override
+    public void getButtonSymbol(JButton[] button) {
+        for (int i = 0; i < 9; i++) {
+            if (button[i].getText().equals("X")) {
+                button[i].setText(" ");
+                button[i].setBackground(Color.BLACK);
+
+            } else if (button[i].getText().equals("O")) {
+                button[i].setText(" ");
+                button[i].setBackground(Color.WHITE);
+            }
+        }
     }
 }

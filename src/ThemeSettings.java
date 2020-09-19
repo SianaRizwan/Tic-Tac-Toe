@@ -4,8 +4,6 @@ import Theme.HighContrastTheme;
 import Theme.ITheme;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ThemeSettings {
     private JButton[] button;
@@ -17,6 +15,8 @@ public class ThemeSettings {
     private JRadioButton rBClassic;
     private JRadioButton rBForest;
     private JRadioButton rBHighContrast;
+//    static int theme = 0;
+
 
     ITheme choosetheme;
 
@@ -29,6 +29,8 @@ public class ThemeSettings {
         rBClassic = classicRadioButton;
         rBForest = forestRadioButton;
         rBHighContrast = highContrastRadioButton;
+        //System.out.println("Classic: "+rBClassic+" Forest: "+rBForest+" High Contrast: "+rBHighContrast);
+        //System.out.println("Main Panel: "+mainpanel+" Boardpanel: "+boardpanel+" Button: "+button);
         chooseThemeButton();
 
     }
@@ -40,27 +42,29 @@ public class ThemeSettings {
             bg.add(rBForest);
             bg.add(rBHighContrast);
         }
-        rBClassic.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choosetheme = new ClassicTheme(rBClassic, rBForest, rBHighContrast);
-                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
+        int turn=0;
 
-            }
+        rBClassic.addActionListener(e -> {
+            choosetheme = new ClassicTheme(rBClassic, rBForest, rBHighContrast);
+            changeTheme(button,choosetheme);
         });
-        rBForest.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choosetheme = new ForestTheme(rBClassic, rBForest, rBHighContrast);
-                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
-            }
+        rBForest.addActionListener(e -> {
+            choosetheme = new ForestTheme(rBClassic, rBForest, rBHighContrast);
+            changeTheme(button,choosetheme);
         });
-        rBHighContrast.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choosetheme = new HighContrastTheme(rBClassic, rBForest, rBHighContrast);
-                choosetheme.getProperty(mainpanel, boardpanel, settingspanel, button, Theme);
-            }
+        rBHighContrast.addActionListener(e -> {
+            choosetheme = new HighContrastTheme(rBClassic, rBForest, rBHighContrast);
+            changeTheme(button,choosetheme);
+
         });
     }
+
+
+
+    public void changeTheme(JButton[] button,ITheme choosetheme)
+    {
+        choosetheme.getBackroundColor(mainpanel, boardpanel, settingspanel, button, Theme);
+        choosetheme.getButtonSymbol(button);
+    }
+
 }

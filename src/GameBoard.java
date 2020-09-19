@@ -58,6 +58,8 @@ public class GameBoard extends JFrame{
         this.setContentPane(mainpanel);
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
+        boardpanel.setMinimumSize(new Dimension(300, 450));
+        settingspanel.setMinimumSize(new Dimension(100, 450));
     }
 
 

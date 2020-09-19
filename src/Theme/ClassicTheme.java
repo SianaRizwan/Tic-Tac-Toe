@@ -26,16 +26,31 @@ public class ClassicTheme implements ITheme {
         rBHighContrast.setForeground(Color.BLACK);
     }
 
-    public void getProperty(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
+    public void getBackroundColor(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
         boardpanel.setBackground(Color.BLACK);
         settingspanel.setBackground(Color.WHITE);
         mainpanel.setBackground(Color.WHITE);
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-        for (int i = 0; i < 9; i++) {
-            button[i].setBackground(Color.white);
-            button[i].setForeground(Color.BLACK);
-        }
+//        for (int i = 0; i < 9; i++) {
+//            button[i].setBackground(Color.white);
+//            button[i].setForeground(Color.BLACK);
+//        }
         setrb();
     }
-}
+
+    @Override
+    public void getButtonSymbol(JButton[] button) {
+        for (int i = 0; i < 9; i++) {
+            if (button[i].getText().equals("X")) {
+                button[i].setText("X");
+
+
+            } else if (button[i].getText().equals("O")) {
+                button[i].setText("O");
+
+            }
+        }
+        }
+    }
+
