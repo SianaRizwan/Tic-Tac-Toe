@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 
 public class GameLogic {
 
-    ThemeSettings themeSettings;
-
     private JPanel settingspanel;
     private JButton startWithDefensiveAIButton;
     private JButton startWithRandomAIButton;
@@ -22,16 +20,12 @@ public class GameLogic {
 
     //  Varibles
     int freeSpots = 9;
-    private String startgame = "X";
     public String[][] board = new String[3][3];
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
-    String playerMark = "X";
-    String playerMarkObj = playerMark;
+    private String playerMarkObj = "X";
 
-    String computerMark = "O";
-    String computerMarkObj = computerMark;
-
+    private String computerMarkObj = "O";
 
 
     //  UI
@@ -47,49 +41,46 @@ public class GameLogic {
     private JLabel Theme;
 
 
-    public HumanPlayer player;
-    public RandomAi randomAi;
-    public DefensiveAi defensiveAi;
-    public AiSettings aiSettings;
-
+    private HumanPlayer player;
+    private RandomAi randomAi;
+    private DefensiveAi defensiveAi;
+    private AiSettings aiSettings;
+    public ThemeSettings themeSettings;
+    private WinLogic winLogic;
 
 
     public int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-
-
 
 
     public GameLogic(JPanel mainpanel, JPanel boardpanel, JButton[] button, JFrame frame) {
         this.mainpanel = mainpanel;
         this.boardpanel = boardpanel;
         this.button = button;
+        this.frame = frame;
         welcomeMessage();
+        initButton(this.button, true, f1);
         initboard();
-        initButton(this.button, true, f1, startgame);
-        aiSettings  = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
-        player = new HumanPlayer(this.button, board,currentState);
-        randomAi = new RandomAi(this.button, board,currentState);
-        defensiveAi = new DefensiveAi(this.button, board,currentState);
-       // themeSettings = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+        aiSettings = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
+        player = new HumanPlayer(this.button, board, currentState);
+        randomAi = new RandomAi(this.button, board, currentState);
+        defensiveAi = new DefensiveAi(this.button, board, currentState);
+        winLogic = new WinLogic(board);
+        // themeSettings = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
 
 
     }
 
     private void restartGame() {
-        JFrame frame = new JFrame();
-        new GameBoard(frame);
+        new GameBoard();
         freeSpots = 9;
         initboard();
-        initButton(this.button, true, f1, startgame);
+        initButton(this.button, true, f1);
         for (int i = 0; i < currentState.length; i++) {
             currentState[i] = -1;
         }
         player = new HumanPlayer(this.button, board, currentState);
         randomAi = new RandomAi(this.button, board, currentState);
         defensiveAi = new DefensiveAi(this.button, board, currentState);
-
-
-
     }
 
     private void initboard() {
@@ -108,7 +99,7 @@ public class GameLogic {
         }
     }
 
-    public void welcomeMessage() {
+    private void welcomeMessage() {
         System.out.println(
                 " ___   _   __   _   _   __  __ ___    _____  _  ___   _____  __   ___   _____  __   ____ \n" +
                         "/  _) ( ) (  ) ( \\ ( ) (  )/_//  _)  (_   _)( )(  _) (_   _)(  ) (  _) (_   _)(  ) (  __)\n" +
@@ -118,69 +109,59 @@ public class GameLogic {
     }
 
 
-    private void initButton(JButton[] button, boolean enableStatus, Font font, String startgame) {
+    private void initButton(JButton[] button, boolean enableStatus, Font font) {
 
         for (int i = 0; i < 9; i++) {
             button[i].setFont(font);
-            button[i].setText("");
             button[i].setEnabled(true);
             button[i].addActionListener(new ButtonListener());
+            button[i].setPreferredSize(new Dimension(40, 40));
+            button[i].setMaximumSize(new Dimension(40, 40));
+            button[i].setMinimumSize(new Dimension(40, 40));
+            button[i].setHorizontalTextPosition(SwingConstants.CENTER);
         }
 
     }
 
+
     public class ButtonListener implements ActionListener {
 
-        int turn = 0;
         @Override
         public void actionPerformed(ActionEvent e) {
-//            System.out.println(ThemeSettings.currentTheme);
-//            if(ThemeSettings.currentTheme == 1)
-//            {
-//                themeSettings.setforestTheme();
-//            }else if(ThemeSettings.currentTheme == 2)
-//            {
-//                themeSettings.setHighContrastTheme();
-//            }
-//            else
-//            {
-//                themeSettings.setClassicTheme();
-//            }
-            if (!winner_player(computerMarkObj) && (turn % 2 == 0) && (freeSpots % 2 != 0)) {
-//                e.getSource().b
+
+            if (!winLogic.winner_player(computerMarkObj) && (freeSpots % 2 != 0)) {
                 player.makeMove(e);
                 freeSpots--;
-                turn++;
                 checkGameWinner();
             }
 
-            if (!winner_player(playerMarkObj) && (turn % 2 != 0) && (freeSpots % 2 == 0)) {
-                if(aiSettings.getType() == 1){
+
+            if (!winLogic.winner_player(playerMarkObj) && (freeSpots % 2 == 0)) {
+                if (aiSettings.getType() == 1) {
                     defensiveAi.makeMove(e);
-                } else if(aiSettings.getType() == 0) {
+                } else if (aiSettings.getType() == 0) {
                     randomAi.makeMove(e);
                 }
                 freeSpots--;
-                turn++;
                 checkGameWinner();
             }
 
         }
 
 
-        public void lockboard() {
+        private void lockboard() {
             for (int i = 0; i < 9; i++) {
                 button[i].setEnabled(false);
             }
         }
 
 
-        public void checkGameWinner() {
-            if (winner_player(playerMarkObj)) {
+        private void checkGameWinner() {
+            if (winLogic.winner_player(playerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, xWon);
                 restartGame();
-            } else if (winner_player(computerMarkObj)) {
+            } else if (winLogic.winner_player(computerMarkObj)) {
                 lockboard();
                 JOptionPane.showMessageDialog(null, yWon);
                 restartGame();
@@ -191,28 +172,5 @@ public class GameLogic {
             }
         }
 
-        //    Game Logic
-        private boolean winner_player(String player) {
-            for (int i = 0; i < 3; i++) {
-                //Row
-                if ((board[i][0].equals(player)) && (board[i][1].equals(player)) && (board[i][2].equals(player))) {
-                    return true;
-                }
-                //Column
-                if ((board[0][i].equals(player)) && (board[1][i].equals(player)) && (board[2][i].equals(player))) {
-                    return true;
-                }
-                //Diagonal left
-                if ((board[0][0].equals(player)) && (board[1][1].equals(player)) && (board[2][2].equals(player))) {
-                    return true;
-                }
-                //Diagonal right
-                if ((board[0][2].equals(player)) && (board[1][1].equals(player)) && (board[2][0].equals(player))) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }

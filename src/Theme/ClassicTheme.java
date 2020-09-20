@@ -32,10 +32,6 @@ public class ClassicTheme implements ITheme {
         mainpanel.setBackground(Color.WHITE);
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-//        for (int i = 0; i < 9; i++) {
-//            button[i].setBackground(Color.white);
-//            button[i].setForeground(Color.BLACK);
-//        }
         setrb();
     }
 
@@ -44,13 +40,11 @@ public class ClassicTheme implements ITheme {
         for (int i = 0; i < 9; i++) {
             if (button[i].getText().equals("X")) {
                 button[i].setText("X");
-
-
             } else if (button[i].getText().equals("O")) {
                 button[i].setText("O");
 
             }
         }
-        }
     }
+}
 

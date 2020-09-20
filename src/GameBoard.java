@@ -33,17 +33,16 @@ public class GameBoard extends JFrame{
 
 
 
-    public GameBoard(JFrame frame){
-
+    public GameBoard() {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        logic = new GameLogic(mainpanel,boardpanel,button,frame);
-        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
-        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton,true);
+        logic = new GameLogic(mainpanel, boardpanel, button, frame);
+        theme = new ThemeSettings(classicRadioButton, forestRadioButton, highContrastRadioButton, mainpanel, boardpanel, button, settingspanel, Theme);
+        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton, true);
         initComponents();
     }
 
@@ -58,14 +57,13 @@ public class GameBoard extends JFrame{
         this.setContentPane(mainpanel);
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-        boardpanel.setMinimumSize(new Dimension(300, 450));
+        boardpanel.setMinimumSize(new Dimension(350, 450));
         settingspanel.setMinimumSize(new Dimension(100, 450));
     }
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        new GameBoard(frame);
+        new GameBoard();
 
 
     }

@@ -33,9 +33,7 @@ public class ForestTheme implements ITheme {
         mainpanel.setBackground(new Color(181, 245, 171));
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-//        for (int i = 0; i < 9; i++) {
-//            button[i].setBackground(new Color(181, 245, 171));
-//        }
+
         setrb();
     }
 
@@ -44,32 +42,24 @@ public class ForestTheme implements ITheme {
         for (int i = 0; i < 9; i++) {
             if (button[i].getText().equals("X")) {
                 button[i].setText(" ");
-                setImageicon(button[i],"images\\player1.png");
+                setImageicon(button[i], "images\\player1.png");
             } else if (button[i].getText().equals("O")) {
                 button[i].setText(" ");
-                setImageicon(button[i],"images\\computer1.png");
+                setImageicon(button[i], "images\\computer1.png");
             }
         }
     }
 
 
     public void setImageicon(JButton button, String imageName) {
-            try {
-                  // button.setIcon(new ImageIcon(imageName));
-               // Image image = ImageIO.read(getClass().getResource(imageName));
-               // ImageIcon icon = new ImageIcon(imageName);
-                Icon icon = new ImageIcon(imageName);
-                button.setDisabledIcon(icon);
-                button.setIcon(icon);
-               // button.setSize(1,1);
-               // button.setLayout(null);
+        try {
+            Icon icon = new ImageIcon(imageName);
+            button.setDisabledIcon(icon);
+            button.setIcon(icon);
+        } catch (Exception ex) {
+            System.out.println(ex);
 
-            } catch (Exception ex) {
-//                System.out.println("PAth: "+ new ImageIcon(this.getClass().getResource("/images/fruit.jpg")).getImage());
-
-                System.out.println(ex);
-                System.out.println("Forrest");
-            }
+        }
     }
 
 

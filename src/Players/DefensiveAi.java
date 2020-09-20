@@ -20,6 +20,7 @@ public class DefensiveAi implements IAi {
     public int[] newState;
 
 
+
     public DefensiveAi(JButton[] button, String[][] board, int[] currentState) {
         btnCoordinate = new BtnCoordinate();
         calledButton = button;
@@ -51,7 +52,6 @@ public class DefensiveAi implements IAi {
                 break;
             } else {
                 isPersonWinning();
-                Board = computerMove;
                 btnCoord = btnRelation[ai_i][ai_j];
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
@@ -71,16 +71,14 @@ public class DefensiveAi implements IAi {
                 if (calledBoard[row][column].equals("")) {
                     calledBoard[row][column] = "X";
                     if (winner_player(playerMove)) {
-                       ai_i = row;
+                        ai_i = row;
                         ai_j = column;
-                         }
+                    }
                     calledBoard[row][column] = "";
-                }
-                if(calledBoard[ai_i][ai_j].equals("X"))
-                {
+                } else if (calledBoard[ai_i][ai_j].equals("X")) {
                     ai_i = (int) (Math.random() * 3);
                     ai_j = (int) (Math.random() * 3);
-                    }
+                }
             }
         }
 
