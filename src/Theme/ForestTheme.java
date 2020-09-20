@@ -40,11 +40,12 @@ public class ForestTheme implements ITheme {
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            if (button[i].getText().equals("X")) {
-                button[i].setText(" ");
+            button[i].setBackground(Color.WHITE);
+            if (button[i].getText().equals("X")  || button[i].getText().equals(".")) {
+                button[i].setText(".");
                 setImageicon(button[i], "images\\player1.png");
-            } else if (button[i].getText().equals("O")) {
-                button[i].setText(" ");
+            } else if (button[i].getText().equals("O") || button[i].getText().equals(",")) {
+                button[i].setText(",");
                 setImageicon(button[i], "images\\computer1.png");
             }
         }

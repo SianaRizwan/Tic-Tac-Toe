@@ -33,16 +33,16 @@ public class GameBoard extends JFrame{
 
 
 
-    public GameBoard() {
+    public GameBoard(){
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-        logic = new GameLogic(mainpanel, boardpanel, button, frame);
-        theme = new ThemeSettings(classicRadioButton, forestRadioButton, highContrastRadioButton, mainpanel, boardpanel, button, settingspanel, Theme);
-        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton, true);
+        logic = new GameLogic(mainpanel,boardpanel,button,frame);
+        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton,true);
         initComponents();
     }
 

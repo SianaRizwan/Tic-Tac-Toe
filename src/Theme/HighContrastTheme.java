@@ -3,8 +3,9 @@ package Theme;
 import javax.swing.*;
 import java.awt.*;
 
-public class HighContrastTheme implements ITheme {
+import static java.awt.Color.*;
 
+public class HighContrastTheme implements ITheme {
     Font f1 = new Font("Arial", Font.BOLD, 30);
     private JRadioButton rBClassic;
     private JRadioButton rBForest;
@@ -17,9 +18,9 @@ public class HighContrastTheme implements ITheme {
     }
 
     public void setrb() {
-        rBClassic.setBackground(Color.DARK_GRAY);
-        rBForest.setBackground(Color.DARK_GRAY);
-        rBHighContrast.setBackground(Color.DARK_GRAY);
+        rBClassic.setBackground(DARK_GRAY);
+        rBForest.setBackground(DARK_GRAY);
+        rBHighContrast.setBackground(DARK_GRAY);
         rBClassic.setForeground(Color.WHITE);
         rBForest.setForeground(Color.WHITE);
         rBHighContrast.setForeground(Color.WHITE);
@@ -28,9 +29,9 @@ public class HighContrastTheme implements ITheme {
 
     @Override
     public void getBackroundColor(JPanel mainpanel, JPanel boardpanel, JPanel settingspanel, JButton[] button, JLabel Theme) {
-        boardpanel.setBackground(Color.LIGHT_GRAY);
-        settingspanel.setBackground(Color.DARK_GRAY);
-        mainpanel.setBackground(Color.DARK_GRAY);
+        boardpanel.setBackground(DARK_GRAY);
+        settingspanel.setBackground(DARK_GRAY);
+        mainpanel.setBackground(DARK_GRAY);
         Theme.setFont(f1);
         Theme.setForeground(Color.WHITE);
         setrb();
@@ -38,12 +39,16 @@ public class HighContrastTheme implements ITheme {
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            if (button[i].getText().equals("X")) {
-                button[i].setText(" ");
+            button[i].setBackground(LIGHT_GRAY);
+            button[i].setIcon(null);
+            if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
+                button[i].setText(".");
                 button[i].setBackground(Color.BLACK);
+                button[i].setForeground(BLACK);
 
-            } else if (button[i].getText().equals("O")) {
-                button[i].setText(" ");
+            } else if (button[i].getText().equals("O") ||  button[i].getText().equals(",")) {
+                button[i].setText(",");
+                button[i].setForeground(WHITE);
                 button[i].setBackground(Color.WHITE);
             }
         }

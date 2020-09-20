@@ -38,9 +38,11 @@ public class ClassicTheme implements ITheme {
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            if (button[i].getText().equals("X")) {
+            button[i].setBackground(Color.WHITE);
+            button[i].setIcon(null);
+            if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
                 button[i].setText("X");
-            } else if (button[i].getText().equals("O")) {
+            } else if (button[i].getText().equals("O")  || button[i].getText().equals(",")) {
                 button[i].setText("O");
 
             }

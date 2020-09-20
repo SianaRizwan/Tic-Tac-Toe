@@ -28,6 +28,8 @@ public class GameLogic {
     private String computerMarkObj = "O";
 
 
+
+
     //  UI
     private JPanel boardpanel;
     private JPanel mainpanel;
@@ -49,7 +51,10 @@ public class GameLogic {
     private WinLogic winLogic;
 
 
+
     public int[] currentState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+
+
 
 
     public GameLogic(JPanel mainpanel, JPanel boardpanel, JButton[] button, JFrame frame) {
@@ -60,10 +65,10 @@ public class GameLogic {
         welcomeMessage();
         initButton(this.button, true, f1);
         initboard();
-        aiSettings = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
-        player = new HumanPlayer(this.button, board, currentState);
-        randomAi = new RandomAi(this.button, board, currentState);
-        defensiveAi = new DefensiveAi(this.button, board, currentState);
+        aiSettings  = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton);
+        player = new HumanPlayer(this.button, board,currentState);
+        randomAi = new RandomAi(this.button, board,currentState);
+        defensiveAi = new DefensiveAi(this.button, board,currentState);
         winLogic = new WinLogic(board);
         // themeSettings = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
 
@@ -72,7 +77,7 @@ public class GameLogic {
 
     private void restartGame() {
         new GameBoard();
-        freeSpots = 9;
+        freeSpots =9 ;
         initboard();
         initButton(this.button, true, f1);
         for (int i = 0; i < currentState.length; i++) {
@@ -115,13 +120,14 @@ public class GameLogic {
             button[i].setFont(font);
             button[i].setEnabled(true);
             button[i].addActionListener(new ButtonListener());
-            button[i].setPreferredSize(new Dimension(40, 40));
-            button[i].setMaximumSize(new Dimension(40, 40));
-            button[i].setMinimumSize(new Dimension(40, 40));
+            button[i].setPreferredSize(new Dimension(40,40));
+            button[i].setMaximumSize(new Dimension(40,40));
+            button[i].setMinimumSize(new Dimension(40,40));
             button[i].setHorizontalTextPosition(SwingConstants.CENTER);
         }
 
     }
+
 
 
     public class ButtonListener implements ActionListener {
@@ -129,17 +135,17 @@ public class GameLogic {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (!winLogic.winner_player(computerMarkObj) && (freeSpots % 2 != 0)) {
+            if (!winLogic.winner_player(computerMarkObj)  && (freeSpots % 2 != 0)) {
                 player.makeMove(e);
                 freeSpots--;
                 checkGameWinner();
             }
 
 
-            if (!winLogic.winner_player(playerMarkObj) && (freeSpots % 2 == 0)) {
-                if (aiSettings.getType() == 1) {
+            if (!winLogic.winner_player(playerMarkObj)  && (freeSpots % 2 == 0)) {
+                if(aiSettings.getType() == 1){
                     defensiveAi.makeMove(e);
-                } else if (aiSettings.getType() == 0) {
+                } else if(aiSettings.getType() == 0) {
                     randomAi.makeMove(e);
                 }
                 freeSpots--;
@@ -147,6 +153,7 @@ public class GameLogic {
             }
 
         }
+
 
 
         private void lockboard() {

@@ -29,12 +29,12 @@ public class ThemeSettings {
         rBClassic = classicRadioButton;
         rBForest = forestRadioButton;
         rBHighContrast = highContrastRadioButton;
-        chooseThemeButton();
+        addThemeButton();
 
     }
 
 
-    private void chooseThemeButton() {
+    private void addThemeButton() {
         {
             ButtonGroup bg = new ButtonGroup();
             bg.add(rBClassic);
@@ -42,15 +42,21 @@ public class ThemeSettings {
             bg.add(rBHighContrast);
         }
 
+        chooseThemeButton();
 
+    }
+    private void chooseThemeButton(){
         rBClassic.addActionListener(e -> {
             setClassicTheme();
+            setCurrentTheme(0);
         });
         rBForest.addActionListener(e -> {
             setForestTheme();
+            setCurrentTheme(1);
         });
         rBHighContrast.addActionListener(e -> {
             setHighContrastTheme();
+            setCurrentTheme(2);
 
         });
     }
@@ -68,6 +74,34 @@ public class ThemeSettings {
     public void setHighContrastTheme() {
         choosetheme = new HighContrastTheme(rBClassic, rBForest, rBHighContrast);
         changeTheme(button, choosetheme);
+    }
+
+    public void setTheme(int theme)
+    {
+        if(theme == 1)
+        {
+            System.out.println("Setting Forest Theme");
+            setForestTheme();
+
+        }else if(theme == 2)
+        {
+            System.out.println("Setting HighContrast Theme");
+            setHighContrastTheme();
+        }else
+        {
+            System.out.println("Setting Classic Theme");
+            setClassicTheme();
+        }
+    }
+    public void setCurrentTheme(int value)
+    {
+        theme = value;
+        setTheme(theme);
+    }
+
+    public int getCurrentTheme()
+    {
+        return theme;
     }
 
 
