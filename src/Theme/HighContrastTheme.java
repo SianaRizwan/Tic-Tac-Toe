@@ -36,6 +36,7 @@ public class HighContrastTheme implements ITheme {
         Theme.setForeground(Color.WHITE);
         setRadiobuttonsColor();
     }
+
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
@@ -55,7 +56,8 @@ public class HighContrastTheme implements ITheme {
         }
 
     }
-    private void setHighContrastButtonProperty(JButton button){
+
+    private void setHighContrastButtonProperty(JButton button) {
         button.setBackground(LIGHT_GRAY);
         button.setIcon(null);
     }

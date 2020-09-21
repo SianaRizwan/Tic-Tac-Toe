@@ -1,8 +1,7 @@
 package Players;
 
 public class BtnCoordinate {
-    BtnCoordinate()
-    {
+    BtnCoordinate() {
     }
 
     public int[][] getButtonCoordinate(int i) {

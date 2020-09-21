@@ -6,9 +6,7 @@ import java.awt.event.ActionEvent;
 public class DefensiveAi implements IAi {
 
     private int[][] btnRelation = new int[3][3];
-
     private String Board;
-
     private BtnCoordinate btnCoordinate;
     private String computerMove = "O";
     private String emptyString = "";
@@ -18,7 +16,6 @@ public class DefensiveAi implements IAi {
     private String[][] calledBoard;
     private int btnCoord;
     private int[] newState;
-
 
 
     public DefensiveAi(JButton[] button, String[][] board, int[] currentState) {
@@ -42,20 +39,21 @@ public class DefensiveAi implements IAi {
 
         while (true) {
 
-            if ((Board.equals(emptyString) && newState [btnCoord] == -1)) {
+            if ((Board.equals(emptyString) && newState[btnCoord] == -1)) {
                 isPersonWinning();
-                btnCoord = btnRelation[ai_i][ai_j];
-                newState [btnCoord] = 500;
-                calledButton[btnCoord].setText(computerMove);
-                calledButton[btnCoord].setEnabled(false);
-                break;
-            } else {
-                isPersonWinning();
-                btnCoord = btnRelation[ai_i][ai_j];
+                btnCoord = btnRelation[ai_i][ai_j]; //gets coordinate of the specific button clicked
+                newState[btnCoord] = 500;
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
                 calledBoard[ai_i][ai_j] = computerMove;
-                newState [btnCoord] = 500;
+                break;
+            } else {
+                isPersonWinning();
+                btnCoord = btnRelation[ai_i][ai_j]; //gets coordinate of the specific button clicked
+                calledButton[btnCoord].setText(computerMove);
+                calledButton[btnCoord].setEnabled(false);
+                calledBoard[ai_i][ai_j] = computerMove;
+                newState[btnCoord] = 500;
                 break;
 
             }
@@ -69,7 +67,7 @@ public class DefensiveAi implements IAi {
             for (int column = 0; column < 3; column++) {
                 if (calledBoard[row][column].equals("")) {
                     calledBoard[row][column] = "X";
-                    if (winner_player(playerMove)) {
+                    if (check_winner(playerMove)) {
                         ai_i = row;
                         ai_j = column;
                     }
@@ -82,34 +80,27 @@ public class DefensiveAi implements IAi {
         }
 
     }
-    private boolean winner_player(String player) {
+
+    private boolean check_winner(String player) {
+        if (checkRowandColumn(player)) return true;
+        else if (checkDiagonal(player)) return true;
+        else return false;
+    }
+    private boolean checkRowandColumn(String player) {
         for (int i = 0; i < 3; i++) {
-            //Row
             if ((calledBoard[i][0].equals(player)) && (calledBoard[i][1].equals(player)) && (calledBoard[i][2].equals(player))) {
                 return true;
-            }
-            //Column
-            if ((calledBoard[0][i].equals(player)) && (calledBoard[1][i].equals(player)) && (calledBoard[2][i].equals(player))) {
-                return true;
-            }
-
-
-            //Diagonal left
-            if ((calledBoard[0][0].equals(player)) && (calledBoard[1][1].equals(player)) && (calledBoard[2][2].equals(player))) {
-                return true;
-            }
-            //Diagonal right
-            if ((calledBoard[0][2].equals(player)) && (calledBoard[1][1].equals(player)) && (calledBoard[2][0].equals(player))) {
+            } else if ((calledBoard[0][i].equals(player)) && (calledBoard[1][i].equals(player)) && (calledBoard[2][i].equals(player))) {
                 return true;
             }
         }
-
         return false;
+    }
+    private boolean checkDiagonal(String player) {
+        if ((( calledBoard[0][0].equals(player)) && ( calledBoard[1][1].equals(player)) && ( calledBoard[2][2].equals(player))) ) {
+            return true;
+        }
+        else return ( calledBoard[0][2].equals(player)) && ( calledBoard[1][1].equals(player)) && ( calledBoard[2][0].equals(player));
     }
 
 }
-
-
-
-
-

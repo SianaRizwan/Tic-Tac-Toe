@@ -10,13 +10,13 @@ import java.awt.event.ActionListener;
 public class GameLogic {
 
     //    END GAME TEXTS
-    private String xWon = "Player Won!";
-    private String yWon = "Computer Won!";
-    private String tie = "It's a TIE!";
+    private String playerWonText = "Player Won!";
+    private String computerWonText = "Computer Won!";
+    private String tieText = "It's a TIE!";
     private String playerMarkObj = "X";
     private String computerMarkObj = "O";
 
-    //  Varibles
+    //  Variables
     int freeSpots = 9;
     public String[][] board = new String[3][3];
     public JButton[] button;
@@ -24,10 +24,10 @@ public class GameLogic {
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
     //  UI
-    private JPanel boardpanel,settingspanel,mainpanel;
+    private JPanel boardpanel, settingspanel, mainpanel;
     private JFrame frame;
-    private JButton startWithDefensiveAIButton,startWithRandomAIButton;
-    private JRadioButton classicRadioButton,forestRadioButton,highContrastRadioButton;
+    private JButton startWithDefensiveAIButton, startWithRandomAIButton;
+    private JRadioButton classicRadioButton, forestRadioButton, highContrastRadioButton;
     private JLabel Theme;
 
 
@@ -39,15 +39,9 @@ public class GameLogic {
     private WinLogic winLogic;
 
 
-
-
-
-
-
-
     public GameLogic(JPanel mainpanel, JPanel boardpanel, JButton[] button, JFrame frame, JPanel settingspanel, JLabel Theme,
-                     JRadioButton classicRadioButton,JRadioButton forestRadioButton,JRadioButton highContrastRadioButton,
-                     JButton startWithRandomAIButton,JButton startWithDefensiveAIButton) {
+                     JRadioButton classicRadioButton, JRadioButton forestRadioButton, JRadioButton highContrastRadioButton,
+                     JButton startWithRandomAIButton, JButton startWithDefensiveAIButton) {
         this.boardpanel = boardpanel;
         this.settingspanel = settingspanel;
         this.Theme = Theme;
@@ -61,18 +55,18 @@ public class GameLogic {
         welcomeMessage();
         initButton(button, f1);
         initboard();
-        aiSettings  = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton,true);
-        player = new HumanPlayer(button, board,currentState);
-        randomAi = new RandomAi(button, board,currentState);
-        defensiveAi = new DefensiveAi(button, board,currentState);
+        aiSettings = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton, true);
+        player = new HumanPlayer(button, board, currentState);
+        randomAi = new RandomAi(button, board, currentState);
+        defensiveAi = new DefensiveAi(button, board, currentState);
         winLogic = new WinLogic(board);
-        themeSettings = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
+        themeSettings = new ThemeSettings(classicRadioButton, forestRadioButton, highContrastRadioButton, mainpanel, boardpanel, button, settingspanel, Theme);
         themeSettings.setCurrentTheme(0);
     }
 
     private void restartGame() {
         new GameBoard();
-        freeSpots =9 ;
+        freeSpots = 9;
         initboard();
         initButton(this.button, f1);
         for (int i = 0; i < currentState.length; i++) {
@@ -108,14 +102,13 @@ public class GameLogic {
             button[i].setFont(font);
             button[i].setEnabled(true);
             button[i].addActionListener(new ButtonListener());
-            button[i].setPreferredSize(new Dimension(40,40));
-            button[i].setMaximumSize(new Dimension(40,40));
-            button[i].setMinimumSize(new Dimension(40,40));
+            button[i].setPreferredSize(new Dimension(40, 40));
+            button[i].setMaximumSize(new Dimension(40, 40));
+            button[i].setMinimumSize(new Dimension(40, 40));
             button[i].setHorizontalTextPosition(SwingConstants.CENTER);
         }
 
     }
-
 
 
     public class ButtonListener implements ActionListener {
@@ -123,7 +116,7 @@ public class GameLogic {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (!winLogic.winner_player(computerMarkObj)  && (freeSpots % 2 != 0)) {
+            if (!winLogic.winner_player(computerMarkObj) && (freeSpots % 2 != 0)) {
                 player.makeMove(e);
                 freeSpots--;
                 setthemebuttons();
@@ -131,10 +124,10 @@ public class GameLogic {
             }
 
 
-            if (!winLogic.winner_player(playerMarkObj)  && (freeSpots % 2 == 0)) {
-                if(aiSettings.getType() == 1){
+            if (!winLogic.winner_player(playerMarkObj) && (freeSpots % 2 == 0)) {
+                if (aiSettings.getType() == 1) {
                     defensiveAi.makeMove(e);
-                } else if(aiSettings.getType() == 0) {
+                } else if (aiSettings.getType() == 0) {
                     randomAi.makeMove(e);
                 }
                 freeSpots--;
@@ -159,15 +152,15 @@ public class GameLogic {
         private void checkGameWinner() {
             if (winLogic.winner_player(playerMarkObj)) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, xWon);
+                JOptionPane.showMessageDialog(null, playerWonText);
                 restartGame();
             } else if (winLogic.winner_player(computerMarkObj)) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, yWon);
+                JOptionPane.showMessageDialog(null, computerWonText);
                 restartGame();
             } else if (freeSpots == 0) {
                 lockboard();
-                JOptionPane.showMessageDialog(null, tie);
+                JOptionPane.showMessageDialog(null, tieText);
                 restartGame();
             }
         }

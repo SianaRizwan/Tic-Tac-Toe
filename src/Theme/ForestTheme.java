@@ -40,9 +40,9 @@ public class ForestTheme implements ITheme {
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
             setForestButtonBackground(button[i]);
-            if(button[i].getText().equals("")){
-                setForestButtonBackground(button[i]);}
-            else if (button[i].getText().equals("X")  || button[i].getText().equals(".")) {
+            if (button[i].getText().equals("")) {
+                setForestButtonBackground(button[i]);
+            } else if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
                 button[i].setText(".");
                 setImageicon(button[i], "images\\player1.png");
             } else if (button[i].getText().equals("O") || button[i].getText().equals(",")) {
@@ -51,7 +51,8 @@ public class ForestTheme implements ITheme {
             }
         }
     }
-    private void setForestButtonBackground(JButton button){
+
+    private void setForestButtonBackground(JButton button) {
         button.setBackground(Color.WHITE);
     }
 

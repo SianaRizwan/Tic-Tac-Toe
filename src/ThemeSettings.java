@@ -9,7 +9,7 @@ public class ThemeSettings {
     private JButton[] button;
     private JPanel mainpanel, boardpanel, settingspanel;
     private JLabel Theme;
-    private JRadioButton rBClassic, rBForest, rBHighContrast;
+    private JRadioButton radioButtonClassic, radioButtonForest, radioButtonHighContrast;
 
     static int theme = 0;
 
@@ -21,19 +21,19 @@ public class ThemeSettings {
         this.settingspanel = settingspanel;
         this.button = button;
         this.Theme = Theme;
-        rBClassic = classicRadioButton;
-        rBForest = forestRadioButton;
-        rBHighContrast = highContrastRadioButton;
-        addThemeButton();
+        radioButtonClassic = classicRadioButton;
+        radioButtonForest = forestRadioButton;
+        radioButtonHighContrast = highContrastRadioButton;
+        addThemeRadioButton();
 
     }
 
-    private void addThemeButton() {
+    private void addThemeRadioButton() {
         {
             ButtonGroup bg = new ButtonGroup();
-            bg.add(rBClassic);
-            bg.add(rBForest);
-            bg.add(rBHighContrast);
+            bg.add(radioButtonClassic);
+            bg.add(radioButtonForest);
+            bg.add(radioButtonHighContrast);
         }
 
         chooseThemeButton();
@@ -41,31 +41,36 @@ public class ThemeSettings {
     }
 
     private void chooseThemeButton() {
-        rBClassic.addActionListener(e -> {
+        radioButtonClassic.addActionListener(e -> {
             setCurrentTheme(0);
         });
-        rBForest.addActionListener(e -> {
+        radioButtonForest.addActionListener(e -> {
             setCurrentTheme(1);
         });
-        rBHighContrast.addActionListener(e -> {
+        radioButtonHighContrast.addActionListener(e -> {
             setCurrentTheme(2);
 
         });
     }
 
     private void setClassicTheme() {
-        choosetheme = new ClassicTheme(rBClassic, rBForest, rBHighContrast);
+        choosetheme = new ClassicTheme(radioButtonClassic, radioButtonForest, radioButtonHighContrast);
         changeTheme(button, choosetheme);
     }
 
     private void setForestTheme() {
-        choosetheme = new ForestTheme(rBClassic, rBForest, rBHighContrast);
+        choosetheme = new ForestTheme(radioButtonClassic, radioButtonForest, radioButtonHighContrast);
         changeTheme(button, choosetheme);
     }
 
     private void setHighContrastTheme() {
-        choosetheme = new HighContrastTheme(rBClassic, rBForest, rBHighContrast);
+        choosetheme = new HighContrastTheme(radioButtonClassic, radioButtonForest, radioButtonHighContrast);
         changeTheme(button, choosetheme);
+    }
+
+    private void changeTheme(JButton[] button, ITheme choosetheme) {
+        choosetheme.getBackroundColor(mainpanel, boardpanel, settingspanel, button, Theme);
+        choosetheme.getButtonSymbol(button);
     }
 
     public void setTheme(int theme) {
@@ -85,12 +90,6 @@ public class ThemeSettings {
 
     public int getCurrentTheme() {
         return theme;
-    }
-
-
-    private void changeTheme(JButton[] button, ITheme choosetheme) {
-        choosetheme.getBackroundColor(mainpanel, boardpanel, settingspanel, button, Theme);
-        choosetheme.getButtonSymbol(button);
     }
 
 }

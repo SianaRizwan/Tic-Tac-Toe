@@ -14,17 +14,15 @@ public class AiSettings {
         this.button = button;
         this.startWithDefensiveAIButton = startWithDefensiveAIButton;
         this.startWithRandomAIButton = startWithRandomAIButton;
-        choosePlayerButton();
+        chooseAiButtonType();
     }
 
-    private void choosePlayerButton() {
+    private void chooseAiButtonType() {
         startWithRandomAIButton.addActionListener(e -> {
-            System.out.println("Random AI");
             setType(0);
         });
 
         startWithDefensiveAIButton.addActionListener(e -> {
-            System.out.println("Defensive AI");
             setType(1);
         });
     }

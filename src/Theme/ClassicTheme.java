@@ -37,19 +37,19 @@ public class ClassicTheme implements ITheme {
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
             setClassicButtonProperty(button[i]);
-            if(button[i].getText().equals("")){
+            if (button[i].getText().equals("")) {
                 setClassicButtonProperty(button[i]);
-            }
-            else if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
+            } else if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
                 button[i].setText("X");
-            } else if (button[i].getText().equals("O")  || button[i].getText().equals(",")) {
+            } else if (button[i].getText().equals("O") || button[i].getText().equals(",")) {
                 button[i].setText("O");
 
             }
         }
 
     }
-    private void setClassicButtonProperty(JButton button){
+
+    private void setClassicButtonProperty(JButton button) {
         for (int i = 0; i < 9; i++) {
             button.setBackground(Color.WHITE);
             button.setIcon(null);

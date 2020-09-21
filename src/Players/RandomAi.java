@@ -6,15 +6,12 @@ import java.awt.event.ActionEvent;
 
 public class RandomAi implements IAi {
     private int[][] btnRelation = new int[3][3];
-
-    private String computerMove = "O";
-    private String emptyString = "";
-
-
     private JButton[] calledButton;
     private String[][] calledBoard;
     private int[] newState;
 
+    private String computerMove = "O";
+    private String emptyString = "";
 
 
     public RandomAi(JButton[] button, String[][] board, int[] currentState) {
@@ -41,12 +38,12 @@ public class RandomAi implements IAi {
         String Board = calledBoard[ai_i][ai_j];
 
 
-
         while (true) {
             if ((Board.equals(emptyString) && newState[btnCoord] == -1)) {
                 newState[btnCoord] = 500;
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
+                calledBoard[ai_i][ai_j] = computerMove;
                 break;
 
             } else {
@@ -58,7 +55,6 @@ public class RandomAi implements IAi {
             }
 
         }
-
 
 
     }

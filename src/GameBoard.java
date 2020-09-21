@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameBoard extends JFrame{
-    private  JFrame frame;
+public class GameBoard extends JFrame {
+    private JFrame frame;
     private JButton upperLeft;
     private JButton upperMiddle;
     private JButton upperRight;
@@ -26,31 +24,24 @@ public class GameBoard extends JFrame{
     private JPanel settingspanel;
     private JPanel mainpanel;
     GameLogic logic;
-    ThemeSettings theme;
-    AiSettings chooseAi;
+
 
     Font f1 = new Font("Arial", Font.BOLD, 30);
 
 
-
-    public GameBoard(){
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        logic = new GameLogic(mainpanel,boardpanel,button,frame,settingspanel,Theme,classicRadioButton,forestRadioButton,highContrastRadioButton,startWithRandomAIButton,startWithDefensiveAIButton);
+    public GameBoard() {
+        exitButton.addActionListener(e -> System.exit(0));
+        logic = new GameLogic(mainpanel, boardpanel, button, frame, settingspanel, Theme, classicRadioButton, forestRadioButton, highContrastRadioButton, startWithRandomAIButton, startWithDefensiveAIButton);
         initComponents();
     }
 
-    private void initComponents(){
+    private void initComponents() {
         this.setTitle("Tic Tac Toe");
-        this.setSize(450,450);
+        this.setSize(450, 450);
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(GameBoard.EXIT_ON_CLOSE);
-        this.setBounds(300,40,700,600);
+        this.setBounds(300, 40, 700, 600);
         this.setResizable(false);
         this.setContentPane(mainpanel);
         Theme.setFont(f1);
@@ -62,7 +53,5 @@ public class GameBoard extends JFrame{
 
     public static void main(String[] args) {
         new GameBoard();
-
-
     }
 }
