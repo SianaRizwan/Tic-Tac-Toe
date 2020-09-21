@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 public class HumanPlayer implements IAi {
 
     private JButton[] calledButton;
-    public BtnCoordinate btnCoordinate = new BtnCoordinate();
-    int[][] btnCoord = new int[1][2];
-    String[][] calledBoard;
-    String playerMove = "X";
-    public int[] newState;
+    private BtnCoordinate btnCoordinate = new BtnCoordinate();
+    private int[][] btnCoord = new int[1][2];
+    private String[][] calledBoard;
+    private String playerMove = "X";
+    private int[] newState;
 
 
     public HumanPlayer(JButton[] button, String[][] board, int[] currentState) {

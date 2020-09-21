@@ -1,13 +1,12 @@
 package Players;
 
 public class BtnCoordinate {
-    int[][] coord = new int[1][2];
     BtnCoordinate()
     {
     }
 
     public int[][] getButtonCoordinate(int i) {
-        int[][] coord = new int[1][2]; // x, y
+        int[][] coord = new int[1][2]; // Gets the coordinate of the button that was clicked
         switch (i) {
             case 0:
                 coord[0][0] = 0;

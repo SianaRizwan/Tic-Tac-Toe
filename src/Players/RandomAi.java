@@ -7,13 +7,13 @@ import java.awt.event.ActionEvent;
 public class RandomAi implements IAi {
     private int[][] btnRelation = new int[3][3];
 
-    String computerMove = "O";
-    String emptyString = "";
-    String playerValue = "X";
+    private String computerMove = "O";
+    private String emptyString = "";
 
-    public JButton[] calledButton;
-    String[][] calledBoard;
-    public int[] newState;
+
+    private JButton[] calledButton;
+    private String[][] calledBoard;
+    private int[] newState;
 
 
 
@@ -47,7 +47,6 @@ public class RandomAi implements IAi {
                 newState[btnCoord] = 500;
                 calledButton[btnCoord].setText(computerMove);
                 calledButton[btnCoord].setEnabled(false);
-                calledBoard[ai_i][ai_j] = computerMove;
                 break;
 
             } else {

@@ -17,7 +17,7 @@ public class HighContrastTheme implements ITheme {
         this.rBHighContrast = rBHighContrast;
     }
 
-    public void setrb() {
+    private void setRadiobuttonsColor() {
         rBClassic.setBackground(DARK_GRAY);
         rBForest.setBackground(DARK_GRAY);
         rBHighContrast.setBackground(DARK_GRAY);
@@ -34,23 +34,29 @@ public class HighContrastTheme implements ITheme {
         mainpanel.setBackground(DARK_GRAY);
         Theme.setFont(f1);
         Theme.setForeground(Color.WHITE);
-        setrb();
+        setRadiobuttonsColor();
     }
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            button[i].setBackground(LIGHT_GRAY);
-            button[i].setIcon(null);
-            if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
+            setHighContrastButtonProperty(button[i]);
+            if (button[i].getText().equals("")) {
+                setHighContrastButtonProperty(button[i]);
+            } else if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
                 button[i].setText(".");
                 button[i].setBackground(Color.BLACK);
                 button[i].setForeground(BLACK);
 
-            } else if (button[i].getText().equals("O") ||  button[i].getText().equals(",")) {
+            } else if (button[i].getText().equals("O") || button[i].getText().equals(",")) {
                 button[i].setText(",");
                 button[i].setForeground(WHITE);
                 button[i].setBackground(Color.WHITE);
             }
         }
+
+    }
+    private void setHighContrastButtonProperty(JButton button){
+        button.setBackground(LIGHT_GRAY);
+        button.setIcon(null);
     }
 }

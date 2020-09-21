@@ -16,7 +16,7 @@ public class ForestTheme implements ITheme {
         this.rBHighContrast = rBHighContrast;
     }
 
-    public void setrb() {
+    private void setRadiobuttonsColor() {
         rBClassic.setBackground(new Color(181, 245, 171));
         rBForest.setBackground(new Color(181, 245, 171));
         rBHighContrast.setBackground(new Color(181, 245, 171));
@@ -33,15 +33,16 @@ public class ForestTheme implements ITheme {
         mainpanel.setBackground(new Color(181, 245, 171));
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-
-        setrb();
+        setRadiobuttonsColor();
     }
 
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            button[i].setBackground(Color.WHITE);
-            if (button[i].getText().equals("X")  || button[i].getText().equals(".")) {
+            setForestButtonBackground(button[i]);
+            if(button[i].getText().equals("")){
+                setForestButtonBackground(button[i]);}
+            else if (button[i].getText().equals("X")  || button[i].getText().equals(".")) {
                 button[i].setText(".");
                 setImageicon(button[i], "images\\player1.png");
             } else if (button[i].getText().equals("O") || button[i].getText().equals(",")) {
@@ -49,6 +50,9 @@ public class ForestTheme implements ITheme {
                 setImageicon(button[i], "images\\computer1.png");
             }
         }
+    }
+    private void setForestButtonBackground(JButton button){
+        button.setBackground(Color.WHITE);
     }
 
 

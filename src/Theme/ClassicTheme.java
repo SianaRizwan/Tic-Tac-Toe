@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ClassicTheme implements ITheme {
-
-
     private JRadioButton rBClassic;
     private JRadioButton rBForest;
     private JRadioButton rBHighContrast;
@@ -17,7 +15,7 @@ public class ClassicTheme implements ITheme {
         this.rBHighContrast = rBHighContrast;
     }
 
-    public void setrb() {
+    private void setRadiobuttonsColor() {
         rBClassic.setBackground(Color.WHITE);
         rBForest.setBackground(Color.WHITE);
         rBHighContrast.setBackground(Color.WHITE);
@@ -32,20 +30,29 @@ public class ClassicTheme implements ITheme {
         mainpanel.setBackground(Color.WHITE);
         Theme.setFont(f1);
         Theme.setForeground(Color.BLACK);
-        setrb();
+        setRadiobuttonsColor();
     }
 
     @Override
     public void getButtonSymbol(JButton[] button) {
         for (int i = 0; i < 9; i++) {
-            button[i].setBackground(Color.WHITE);
-            button[i].setIcon(null);
-            if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
+            setClassicButtonProperty(button[i]);
+            if(button[i].getText().equals("")){
+                setClassicButtonProperty(button[i]);
+            }
+            else if (button[i].getText().equals("X") || button[i].getText().equals(".")) {
                 button[i].setText("X");
             } else if (button[i].getText().equals("O")  || button[i].getText().equals(",")) {
                 button[i].setText("O");
 
             }
+        }
+
+    }
+    private void setClassicButtonProperty(JButton button){
+        for (int i = 0; i < 9; i++) {
+            button.setBackground(Color.WHITE);
+            button.setIcon(null);
         }
     }
 }

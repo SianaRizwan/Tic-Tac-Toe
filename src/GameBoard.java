@@ -40,9 +40,7 @@ public class GameBoard extends JFrame{
                 System.exit(0);
             }
         });
-        logic = new GameLogic(mainpanel,boardpanel,button,frame);
-        theme = new ThemeSettings(classicRadioButton,forestRadioButton,highContrastRadioButton,mainpanel,boardpanel,button,settingspanel,Theme);
-        chooseAi = new AiSettings(mainpanel, boardpanel, button, settingspanel, startWithDefensiveAIButton, startWithRandomAIButton,true);
+        logic = new GameLogic(mainpanel,boardpanel,button,frame,settingspanel,Theme,classicRadioButton,forestRadioButton,highContrastRadioButton,startWithRandomAIButton,startWithDefensiveAIButton);
         initComponents();
     }
 
